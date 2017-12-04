@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Dark Souls III Planner</string>
+    <string-array name="covenantNames">
+        <item>Way of Blue</item>
+        <item>Mound-makers</item>
+        <item>Warrior of Sunlight</item>
+        <item>Blue Sentinels</item>
+        <item>Watchdogs of Farron</item>
+        <item>Rosaria\'s Fingers</item>
+        <item>Aldrich Faithful</item>
+        <item>Blade of the Darkmoon</item>
+    </string-array>
+</resources>
