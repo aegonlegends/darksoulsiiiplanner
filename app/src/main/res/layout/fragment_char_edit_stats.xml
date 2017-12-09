@@ -1,388 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginTop="10dp">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp">
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_weight="1"
-            android:width="0dp"
-            android:hint="Name"
-            android:inputType="text"
-            android:textColor="@android:color/black" />
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Name"
+                android:inputType="text"
+                android:maxLength="16" />
+
+            <Spinner
+                android:id="@+id/sClass"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:entries="@array/classNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/tvLevel"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:width="0dp"
-                android:text="Level xxx"
+                android:layout_width="0dp"
+                android:text="Level 999"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <Spinner
                 android:id="@+id/sCovenant"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:textAlignment="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:entries="@array/covenantNames"
-                android:spinnerMode="dialog" />
-        </TableRow>
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="Stat"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
-
-            <TextView
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="Leveled"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
-
-            <TextView
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="Total"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="VIG"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/etVIG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tvTotalVIG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="ATT"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/etATT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-
-            <TextView
-                android:id="@+id/tvTotalATT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="END"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/etEND"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tvTotalEND"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        </TableRow>
-
-        <TableRow
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="VIT"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:paddingTop="20px">
 
-            <EditText
-                android:id="@+id/etVIT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:inputType="number"
-                android:maxLength="2" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
 
-            <TextView
-                android:id="@+id/tvTotalVIT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="Stat"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
 
-        </TableRow>
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="Total"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="STR"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <TextView
+                    android:id="@+id/textView4"
 
-            <EditText
-                android:id="@+id/etSTR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:inputType="number" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Vigor"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/tvTotalSTR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <EditText
+                    android:id="@+id/etVIG"
 
-        </TableRow>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvTotalVIG"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="DEX"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <EditText
-                android:id="@+id/etDEX"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/tvTotalDEX"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </TableRow>
+                <TextView
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Attunement"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="INT"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <EditText
+                    android:id="@+id/etATT"
 
-            <EditText
-                android:id="@+id/etINT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tvTotalINT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="FTH"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/etFTH"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tvTotalFTH"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:text="LCK"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/etLCK"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:ems="10"
-                android:maxLength="2"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tvTotalVIG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:width="0dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-        </TableRow>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
 
 
+                <TextView
+                    android:id="@+id/tvTotalATT"
 
-    </TableLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView3"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Endurance"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etEND"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalEND"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Vitality"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etVIT"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalVIT"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Strength"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etSTR"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalSTR"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Dexterity"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etDEX"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalDEX"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Intelligence"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etINT"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalINT"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Faith"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etFTH"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalFTH"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Luck"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/etLCK"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvTotalLCK"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </TableRow>
+
+
+        </TableLayout>
+    </LinearLayout>
 </ScrollView>

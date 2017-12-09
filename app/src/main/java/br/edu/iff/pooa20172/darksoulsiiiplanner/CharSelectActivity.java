@@ -21,7 +21,6 @@ public class CharSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_char_select);
         Toolbar toolbar = (Toolbar) findViewById(R.id.CStoolbar);
-        toolbar.setBackgroundColor(Color.GRAY);
         this.setSupportActionBar(toolbar);
 
         ListView lista = (ListView) findViewById(R.id.lvCharacters);

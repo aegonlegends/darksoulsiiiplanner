@@ -32,10 +32,6 @@ public class CharEditActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(pager);
     }
 
-    void onClickTabs(View v){
-
-    }
-
     private class CharEditPagerAdapter extends FragmentStatePagerAdapter {
         public CharEditPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -43,13 +39,21 @@ public class CharEditActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new CharEditStatsFragment();
+            switch (position) {
+                case 0:
+                    return new CharEditStatsFragment();
+                case 1:
+                    return new CharEditEquipFragment();
+                case 2:
+                    //return new CharEditStatsFragment();
+            }
+            return null;
         }
 
         @Override
         public int getCount() {
-            return 1;
-        } // TODO: Make three tabs
+            return 3;
+        }
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -59,7 +63,7 @@ public class CharEditActivity extends AppCompatActivity {
                 case 1:
                     return "Equipment";
                 case 2:
-                    return "Overview";
+                    //return "Overview";
             }
             return null;
         }

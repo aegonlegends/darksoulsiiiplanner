@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSubmenu"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipment Load: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="120/160"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="75%"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
+            android:textColor="@android:color/holo_red_dark" />
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Armor"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:layout_marginTop="10dp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Helmet"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <Spinner
+                        android:id="@+id/sHelm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:entries="@array/armorHelms"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Chestpiece"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <Spinner
+                        android:id="@+id/sChest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:entries="@array/armorChests"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Gauntlets"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <Spinner
+                        android:id="@+id/sGauntlets"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:entries="@array/armorGauntlets"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Leggings"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <Spinner
+                        android:id="@+id/sLeggings"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:entries="@array/armorLeggings"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center" />
+                </TableRow>
+
+            </TableLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rings"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:layout_marginTop="10dp"/>
+            <Spinner
+                android:id="@+id/sRing1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ringNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+            <Spinner
+                android:id="@+id/sRing2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ringNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+            <Spinner
+                android:id="@+id/sRing3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ringNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+            <Spinner
+                android:id="@+id/sRing4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ringNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weapons"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:layout_marginTop="10dp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tvWeaponL1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Left 1"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                    <TextView
+                        android:id="@+id/tvWeaponR1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Right 1"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                </TableRow>
+                <TableRow>
+                    <Spinner
+                        android:id="@+id/sWeaponL1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                    <Spinner
+                        android:id="@+id/sWeaponR1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tvWeaponL2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Left 2"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                    <TextView
+                        android:id="@+id/tvWeaponR2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Right 2"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                </TableRow>
+                <TableRow>
+                    <Spinner
+                        android:id="@+id/sWeaponL2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                    <Spinner
+                        android:id="@+id/sWeaponR2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tvWeaponL3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Left 3"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                    <TextView
+                        android:id="@+id/tvWeaponR3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Right 3"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                </TableRow>
+                <TableRow>
+                    <Spinner
+                        android:id="@+id/sWeaponL3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                    <Spinner
+                        android:id="@+id/sWeaponR3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:entries="@array/weaponNames"
+                        android:spinnerMode="dialog" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Spell"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <Spinner
+                android:id="@+id/sSpell1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
