@@ -58,7 +58,7 @@
     <string-array name="weaponNames">
         <item>Bare Fists</item>
         <item>Broadsword</item>
-        <item>Havel's Greatshield</item>
+        <item>Havel\'s Greatshield</item>
     </string-array>
 
     <string-array name="spellNames">

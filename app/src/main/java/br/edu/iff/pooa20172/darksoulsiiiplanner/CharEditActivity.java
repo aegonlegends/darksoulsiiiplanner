@@ -45,7 +45,7 @@ public class CharEditActivity extends AppCompatActivity {
                 case 1:
                     return new CharEditEquipFragment();
                 case 2:
-                    //return new CharEditStatsFragment();
+                    return new CharEditOverviewFragment();
             }
             return null;
         }
@@ -63,7 +63,7 @@ public class CharEditActivity extends AppCompatActivity {
                 case 1:
                     return "Equipment";
                 case 2:
-                    //return "Overview";
+                    return "Overview";
             }
             return null;
         }
