@@ -1,7 +1,6 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -51,10 +50,10 @@ public class CharSelectActivity extends AppCompatActivity {
 
     private ArrayList<Character> populateList() {
         chars = new ArrayList<Character>();
-        chars.add(new Character("Aegon Dalenthar", 80, 2));
-        chars.add(new Character("Izabella Dalenthar", 78, 0));
-        chars.add(new Character("Cecile Erathell", 120, 5));
-        chars.add(new Character("Claire Erathell", 8, 6));
+        chars.add(new Character("Aegon Dalenthar", 2, 80));
+        chars.add(new Character("Izabella Dalenthar", 0, 78));
+        chars.add(new Character("Cecile Erathell", 5, 120));
+        chars.add(new Character("Claire Erathell", 6, 8));
         return chars;
     }
 }

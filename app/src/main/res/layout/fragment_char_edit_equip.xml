@@ -204,14 +204,6 @@
                         android:spinnerMode="dialog" />
 
                     <Spinner
-                        android:id="@+id/sWeaponL1lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
-
-                    <Spinner
                         android:id="@+id/sWeaponR1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -219,13 +211,6 @@
                         android:textAlignment="center"
                         android:entries="@array/weaponNames"
                         android:spinnerMode="dialog" />
-                    <Spinner
-                        android:id="@+id/sWeaponR1lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
                 </TableRow>
 
                 <TableRow android:layout_marginTop="5dp">
@@ -255,13 +240,6 @@
                         android:textAlignment="center"
                         android:entries="@array/weaponNames"
                         android:spinnerMode="dialog" />
-                    <Spinner
-                        android:id="@+id/sWeaponL2lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
 
                     <Spinner
                         android:id="@+id/sWeaponR2"
@@ -271,13 +249,6 @@
                         android:textAlignment="center"
                         android:entries="@array/weaponNames"
                         android:spinnerMode="dialog" />
-                    <Spinner
-                        android:id="@+id/sWeaponR2lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
                 </TableRow>
 
                 <TableRow android:layout_marginTop="5dp">
@@ -307,13 +278,6 @@
                         android:textAlignment="center"
                         android:entries="@array/weaponNames"
                         android:spinnerMode="dialog" />
-                    <Spinner
-                        android:id="@+id/sWeaponL3lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
 
                     <Spinner
                         android:id="@+id/sWeaponR3"
@@ -323,13 +287,6 @@
                         android:textAlignment="center"
                         android:entries="@array/weaponNames"
                         android:spinnerMode="dialog" />
-                    <Spinner
-                        android:id="@+id/sWeaponR3lvl"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:minWidth="75dp"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center" />
                 </TableRow>
 
             </TableLayout>
