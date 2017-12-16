@@ -2,38 +2,50 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 public class Character {
-    String name;
-    int level, covenant;
-    int vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck;
-    Weapon leftHand1, leftHand2, leftHand3, rightHand1, rightHand2, rightHand3;
-    Armor helm, chest, gauntlets, boots;
-    static int[] hpValues = {0,0,0,0,0,0,0,0, 381, 403, 427, 454, 483, 515, 550, 594, 638, 681, 723, 764, 804, 842, 879, 914, 947, 977, 1000, 1019, 1038, 1056, 1074, 1092, 1109, 1125, 1141, 1157, 1172, 1186, 1200, 1213, 1226, 1238, 1249, 1260, 1269, 1278, 1285, 1292, 1297, 1300, 1302, 1304, 1307, 1309, 1312, 1314, 1316, 1319, 1321, 1323, 1326, 1328, 1330, 1333, 1335, 1337, 1340, 1342, 1344, 1346, 1348, 1351, 1353, 1355, 1357, 1359, 1361, 1363, 1365, 1367, 1369, 1371, 1373, 1375, 1377, 1379, 1381, 1383, 1385, 1386, 1388, 1390, 1391, 1393, 1395, 1396, 1397, 1399, 1400};
-    static int[] fpValues = {0,0,0,0,0, 72, 77, 82, 87, 93, 98, 103, 109, 114, 120, 124, 130, 136, 143, 150, 157, 165, 173, 181, 189, 198, 206, 215, 224, 233, 242, 251, 260, 270, 280, 283, 286, 289, 293, 296, 299, 302, 305, 309, 312, 315, 318, 320, 323, 326, 329, 332, 334, 337, 339, 342, 344, 346, 348, 350, 352, 355, 358, 361, 364, 366, 369, 372, 375, 377, 380, 383, 385, 388, 391, 394, 396, 399, 402, 404, 407, 409, 412, 415, 417, 420, 422, 425, 427, 430, 432, 434, 437, 439, 441, 444, 446, 448, 450};
-    static int[] staminaValues = {0,0,0,0,0,0,0,0, 90, 94, 95, 97, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 125, 127, 129, 132, 134, 136, 139, 141, 144, 146, 149, 152, 154, 157, 160};
-    static int[] attSlotsBreakpoints = {10, 14, 18, 24, 30, 40, 50, 60, 80, 99};
+    private String name;
+    private Classe classe;
+    private int covenant, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck;
+    private Weapon leftHand1, leftHand2, leftHand3, rightHand1, rightHand2, rightHand3;
+    private Armor helm, chest, gauntlets, boots;
+    private static int[] hpValues = {0,0,0,0,0,0,0,0, 381, 403, 427, 454, 483, 515, 550, 594, 638, 681, 723, 764, 804, 842, 879, 914, 947, 977, 1000, 1019, 1038, 1056, 1074, 1092, 1109, 1125, 1141, 1157, 1172, 1186, 1200, 1213, 1226, 1238, 1249, 1260, 1269, 1278, 1285, 1292, 1297, 1300, 1302, 1304, 1307, 1309, 1312, 1314, 1316, 1319, 1321, 1323, 1326, 1328, 1330, 1333, 1335, 1337, 1340, 1342, 1344, 1346, 1348, 1351, 1353, 1355, 1357, 1359, 1361, 1363, 1365, 1367, 1369, 1371, 1373, 1375, 1377, 1379, 1381, 1383, 1385, 1386, 1388, 1390, 1391, 1393, 1395, 1396, 1397, 1399, 1400};
+    private static int[] fpValues = {0,0,0,0,0, 72, 77, 82, 87, 93, 98, 103, 109, 114, 120, 124, 130, 136, 143, 150, 157, 165, 173, 181, 189, 198, 206, 215, 224, 233, 242, 251, 260, 270, 280, 283, 286, 289, 293, 296, 299, 302, 305, 309, 312, 315, 318, 320, 323, 326, 329, 332, 334, 337, 339, 342, 344, 346, 348, 350, 352, 355, 358, 361, 364, 366, 369, 372, 375, 377, 380, 383, 385, 388, 391, 394, 396, 399, 402, 404, 407, 409, 412, 415, 417, 420, 422, 425, 427, 430, 432, 434, 437, 439, 441, 444, 446, 448, 450};
+    private static int[] staminaValues = {0,0,0,0,0,0,0,0, 90, 94, 95, 97, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 125, 127, 129, 132, 134, 136, 139, 141, 144, 146, 149, 152, 154, 157, 160};
+    private static int[] attSlotsBreakpoints = {10, 14, 18, 24, 30, 40, 50, 60, 80, 99};
 
-    public Character(String name, int covenant, int level) {
-        this.level = level;
+    public Character(String name, int covenant, Classe classe) {
+        this.classe = classe;
         this.covenant = covenant;
         this.name = name;
+        this.vigor = classe.getVigor();
+        this.attunement = classe.getAttunement();
+        this.endurance = classe.getEndurance();
+        this.vitality = classe.getVitality();
+        this.strength = classe.getStrength();
+        this.dexterity = classe.getDexterity();
+        this.intelligence = classe.getIntelligence();
+        this.faith = classe.getFaith();
+        this.luck = classe.getLuck();
     }
 
-    public Character(String name, int level, int covenant, int vig, int att, int end, int vit, int str, int dex, int inte, int fth, int luck) {
+    public Character(String name, Classe classe, int covenant, int vig, int att, int end, int vit, int str, int dex, int inte, int fth, int luck) {
         this.name = name;
-        this.level = level;
+        this.classe = classe;
         this.covenant = covenant;
-        this.vigor = vig;
-        this.attunement = att;
-        this.endurance = end;
-        this.vitality = vit;
-        this.strength = str;
-        this.dexterity = dex;
-        this.intelligence = inte;
-        this.faith = fth;
-        this.luck = luck;
+        this.vigor = vig < classe.getVigor() ? classe.getVigor() : vig;
+        this.attunement = att < classe.getAttunement() ? classe.getAttunement() : att;
+        this.endurance = end < classe.getEndurance() ? classe.getEndurance() : end;
+        this.vitality = vit < classe.getVitality() ? classe.getVitality() : vit;
+        this.strength = str < classe.getStrength() ? classe.getStrength() : str;
+        this.dexterity = dex < classe.getDexterity() ? classe.getDexterity() : dex;
+        this.intelligence = inte < classe.getIntelligence() ? classe.getIntelligence() : inte;
+        this.faith = fth < classe.getFaith() ? classe.getFaith() : fth;
+        this.luck = luck < classe.getLuck() ? classe.getLuck() : luck;
     }
 
-    int calculateHP(){
+    int calculateHP(int bonusVigor){
+        int vigor = this.vigor + bonusVigor;
+        if(vigor>99){ vigor = 99;}
+
         return hpValues[vigor-1];
     }
 
@@ -41,14 +53,20 @@ public class Character {
         return fpValues[attunement-1];
     }
 
-    int calculateStamina(){
+    int calculateStamina(int bonusEndurance){
+        int endurance = this.endurance + bonusEndurance;
+        if(endurance>99){ endurance = 99;}
+
         if(endurance > 40){
             return staminaValues[40] + (endurance-40)/6;
         }
         return staminaValues[endurance];
     }
 
-    float calculateEquipLoad(){
+    float calculateEquipLoad(int bonusVitality){
+        int vitality = this.vitality + bonusVitality;
+        if(vitality>99){ vitality= 99;}
+
         return 40 + vitality;
     }
 
@@ -202,11 +220,18 @@ public class Character {
     // Getters and Setters
 
     public int getLevel() {
-        return level;
-    }
+        int level = classe.getLevel();
 
-    public void setLevel(int level) {
-        this.level = level;
+        level += getVigor() - classe.getVigor();
+        level += getAttunement() - classe.getAttunement();
+        level += getEndurance() - classe.getEndurance();
+        level += getVitality() - classe.getVitality();
+        level += getStrength() - classe.getStrength();
+        level += getDexterity() - classe.getDexterity();
+        level += getIntelligence() - classe.getIntelligence();
+        level += getFaith() - classe.getFaith();
+        level += getLuck() - classe.getLuck();
+        return level;
     }
 
     public int getCovenant() {
@@ -215,6 +240,38 @@ public class Character {
 
     public void setCovenant(int covenant) {
         this.covenant = covenant;
+    }
+
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+        this.vigor = classe.getVigor();
+        this.attunement = classe.getAttunement();
+        this.endurance = classe.getEndurance();
+        this.vitality = classe.getVitality();
+        this.strength = classe.getStrength();
+        this.dexterity = classe.getDexterity();
+        this.intelligence = classe.getIntelligence();
+        this.faith = classe.getFaith();
+        this.luck = classe.getLuck();
+    }
+
+    public void setClasse(int index){
+        switch (index){
+            case 0 : setClasse(Classe.KNIGHT); break;
+            case 1 : setClasse(Classe.MERCENARY); break;
+            case 2 : setClasse(Classe.WARRIOR); break;
+            case 3 : setClasse(Classe.HERALD); break;
+            case 4 : setClasse(Classe.THIEF); break;
+            case 5 : setClasse(Classe.ASSASSIN); break;
+            case 6 : setClasse(Classe.SORCERER); break;
+            case 7 : setClasse(Classe.PYROMANCER); break;
+            case 8 : setClasse(Classe.CLERIC); break;
+            case 9 : setClasse(Classe.DEPRIVED);
+        }
     }
 
     public String getName() {
@@ -230,6 +287,10 @@ public class Character {
     }
 
     public void setVigor(int vigor) {
+        if(vigor < classe.getVigor()) {
+            this.vigor = classe.getVigor();
+            return;
+        }
         this.vigor = vigor;
     }
 
@@ -238,6 +299,10 @@ public class Character {
     }
 
     public void setAttunement(int attunement) {
+        if(attunement < classe.getAttunement()) {
+            this.attunement = classe.getAttunement();
+            return;
+        }
         this.attunement = attunement;
     }
 
@@ -246,6 +311,10 @@ public class Character {
     }
 
     public void setEndurance(int endurance) {
+        if(endurance < classe.getEndurance()) {
+            this.endurance = classe.getEndurance();
+            return;
+        }
         this.endurance = endurance;
     }
 
@@ -254,6 +323,10 @@ public class Character {
     }
 
     public void setVitality(int vitality) {
+        if(vitality < classe.getVitality()) {
+            this.vitality = classe.getVitality();
+            return;
+        }
         this.vitality = vitality;
     }
 
@@ -262,6 +335,10 @@ public class Character {
     }
 
     public void setStrength(int strength) {
+        if(strength < classe.getStrength()) {
+            this.strength = classe.getStrength();
+            return;
+        }
         this.strength = strength;
     }
 
@@ -270,6 +347,10 @@ public class Character {
     }
 
     public void setDexterity(int dexterity) {
+        if(dexterity < classe.getDexterity()) {
+            this.dexterity = classe.getDexterity();
+            return;
+        }
         this.dexterity = dexterity;
     }
 
@@ -278,6 +359,10 @@ public class Character {
     }
 
     public void setIntelligence(int intelligence) {
+        if(intelligence < classe.getIntelligence()) {
+            this.intelligence = classe.getIntelligence();
+            return;
+        }
         this.intelligence = intelligence;
     }
 
@@ -286,6 +371,10 @@ public class Character {
     }
 
     public void setFaith(int faith) {
+        if(faith < classe.getFaith()) {
+            this.faith = classe.getFaith();
+            return;
+        }
         this.faith = faith;
     }
 
@@ -294,6 +383,10 @@ public class Character {
     }
 
     public void setLuck(int luck) {
+        if(luck < classe.getLuck()) {
+            this.luck = classe.getLuck();
+            return;
+        }
         this.luck = luck;
     }
 

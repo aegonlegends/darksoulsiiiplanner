@@ -50,10 +50,10 @@ public class CharSelectActivity extends AppCompatActivity {
 
     private ArrayList<Character> populateList() {
         chars = new ArrayList<Character>();
-        chars.add(new Character("Aegon Dalenthar", 2, 80));
-        chars.add(new Character("Izabella Dalenthar", 0, 78));
-        chars.add(new Character("Cecile Erathell", 5, 120));
-        chars.add(new Character("Claire Erathell", 6, 8));
+        chars.add(new Character("Aegon Dalenthar", 2, Classe.KNIGHT));
+        chars.add(new Character("Izabella Dalenthar", 0, Classe.MERCENARY));
+        chars.add(new Character("Cecile Erathell", 5, Classe.CLERIC));
+        chars.add(new Character("Claire Erathell", 6, Classe.SORCERER));
         return chars;
     }
 }

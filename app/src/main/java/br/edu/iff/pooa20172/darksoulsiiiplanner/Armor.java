@@ -1,11 +1,11 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 public class Armor extends Equipment {
-    int type;
+    private int type;
+    private float physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption,fireAbsorption,lightningAbsorption,darkAbsorption, bleedResistance, poisonResistance, frostResistance, curseResistance;
     static public int TYPE_HELM = 0, TYPE_CHESTPIECE = 1, TYPE_GAUNTLETS = 2, TYPE_BOOTS = 3;
-    float physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption,fireAbsorption,lightningAbsorption,darkAbsorption, bleedResistance, poisonResistance, frostResistance, curseResistance;
 
-    public Armor(String name, float weight, int durability, int specialEffects, int type, float physicalAbsorption, float strikeAbsorption, float slashAbsorption, float thrustAbsorption, float magicAbsorption, float fireAbsorption, float lightningAbsorption, float darkAbsorption, float bleedResistance, float poisonResistance, float frostResistance, float curseResistance) {
+    public Armor(String name, float weight, int durability, SpecialEffect[] specialEffects, int type, float physicalAbsorption, float strikeAbsorption, float slashAbsorption, float thrustAbsorption, float magicAbsorption, float fireAbsorption, float lightningAbsorption, float darkAbsorption, float bleedResistance, float poisonResistance, float frostResistance, float curseResistance) {
         this.name = name;
         this.weight = weight;
         this.durability = durability;

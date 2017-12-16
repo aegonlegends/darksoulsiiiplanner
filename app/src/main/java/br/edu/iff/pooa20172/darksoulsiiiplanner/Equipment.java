@@ -3,7 +3,8 @@ package br.edu.iff.pooa20172.darksoulsiiiplanner;
 public abstract class Equipment {
     protected String name;
     protected float weight;
-    protected int durability, specialEffects;
+    protected int durability, index;
+    protected SpecialEffect[] specialEffects;
 
     public String getName() {
         return name;
@@ -17,7 +18,7 @@ public abstract class Equipment {
         return durability;
     }
 
-    public int getSpecialEffects() {
+    public SpecialEffect[] getSpecialEffects() {
         return specialEffects;
     }
 }
