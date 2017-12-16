@@ -31,15 +31,15 @@ public class Character {
         this.name = name;
         this.classe = classe;
         this.covenant = covenant;
-        this.vigor = vig < classe.getVigor() ? classe.getVigor() : vig;
-        this.attunement = att < classe.getAttunement() ? classe.getAttunement() : att;
-        this.endurance = end < classe.getEndurance() ? classe.getEndurance() : end;
-        this.vitality = vit < classe.getVitality() ? classe.getVitality() : vit;
-        this.strength = str < classe.getStrength() ? classe.getStrength() : str;
-        this.dexterity = dex < classe.getDexterity() ? classe.getDexterity() : dex;
-        this.intelligence = inte < classe.getIntelligence() ? classe.getIntelligence() : inte;
-        this.faith = fth < classe.getFaith() ? classe.getFaith() : fth;
-        this.luck = luck < classe.getLuck() ? classe.getLuck() : luck;
+        this.vigor = vig;
+        this.attunement = att;
+        this.endurance = end;
+        this.vitality = vit;
+        this.strength = str;
+        this.dexterity = dex;
+        this.intelligence = inte;
+        this.faith = fth;
+        this.luck = luck;
     }
 
     int calculateHP(int bonusVigor){
@@ -248,15 +248,15 @@ public class Character {
 
     public void setClasse(Classe classe) {
         this.classe = classe;
-        this.vigor = classe.getVigor();
-        this.attunement = classe.getAttunement();
-        this.endurance = classe.getEndurance();
-        this.vitality = classe.getVitality();
-        this.strength = classe.getStrength();
-        this.dexterity = classe.getDexterity();
-        this.intelligence = classe.getIntelligence();
-        this.faith = classe.getFaith();
-        this.luck = classe.getLuck();
+        this.vigor = getVigor() < classe.getVigor() ? classe.getVigor() : getVigor();
+        this.attunement = getAttunement() < classe.getAttunement() ? classe.getAttunement() : getAttunement();
+        this.endurance = getEndurance() < classe.getEndurance() ? classe.getEndurance() : getEndurance();
+        this.vitality = getVitality() < classe.getVitality() ? classe.getVitality() : getVitality();
+        this.strength = getStrength() < classe.getStrength() ? classe.getStrength() : getStrength();
+        this.dexterity = getDexterity() < classe.getDexterity() ? classe.getDexterity() : getDexterity();
+        this.intelligence = getIntelligence() < classe.getIntelligence() ? classe.getIntelligence() : getIntelligence();
+        this.faith = getFaith() < classe.getFaith() ? classe.getFaith() : getFaith();
+        this.luck = getLuck() < classe.getLuck() ? classe.getLuck() : getLuck();
     }
 
     public void setClasse(int index){

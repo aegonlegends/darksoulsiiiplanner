@@ -73,8 +73,8 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
         }
 
         switch(idName){
-            case "sClasse": character.setClasse(index);
-            //    break;
+            case "sClass": character.setClasse(index);
+                break;
             case "sCovenant": character.setCovenant(index);
                 break;
         }
