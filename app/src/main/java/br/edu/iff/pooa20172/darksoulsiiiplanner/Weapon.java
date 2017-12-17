@@ -1,14 +1,17 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 public class Weapon extends Equipment {
-    boolean blessed, hollow, ignoreScaling;
-    int strengthRequirement, dexterityRequirement, faithRequirement, intelligenceRequirement;
-    float physicalBaseAttack, magicBaseAttack, fireBaseAttack, lightningBaseAttack, darkBaseAttack, bleedBuildup;
-    int poisonBuildup, frostBuildup, criticalMod, physicalBlock, magicBlock, fireBlock, lightningBlock, darkBlock;
-    float strengthScaling, dexterityScaling, intelligenceScaling, faithScaling, luckScaling;
-    int physicalSaturationIndex, magicSaturationIndex, fireSaturationIndex, lightningSaturationIndex, darkSaturationIndex;
+    private boolean blessed, hollow, catalyst, infusable;
+    private int strengthRequirement, dexterityRequirement, faithRequirement, intelligenceRequirement,
+            stability, infusion, criticalMod, bleedBuildup, poisonBuildup, frostBuildup;
+    private double physicalBaseAttack, magicBaseAttack, fireBaseAttack, lightningBaseAttack, darkBaseAttack,
+            physicalBlock, magicBlock, fireBlock, lightningBlock, darkBlock;
+    private double strengthScaling, dexterityScaling, intelligenceScaling, faithScaling, luckScaling;
+    private int physicalSaturationIndex, magicSaturationIndex, fireSaturationIndex, lightningSaturationIndex, darkSaturationIndex;
 
-    static double[][] saturationCurves = {
+    public static final int REGULAR=0,REFINED=1, RAW=2, FIRE=3, HEAVY=4, SHARP=5, POISON=6, CRYSTAL=7, BLESSED=8, DEEP=9, DARK=10, BLOOD=11, HOLLOW=12, LIGHTNING=13, SIMPLE=14, CHAOS=15;
+
+    private static double[][] saturationCurves = {
             // Index 0
             {0, 0, 0.8344518907, 1.917067028, 3.118507614, 4.404263484, 5.756590123, 7.164449132, 8.620231934, 10.11834044, 11.65446426, 13.22517121, 14.8276568, 16.45958186, 18.11896248, 19.80409249, 21.51348727, 23.24584203, 25, 27.71472262, 30.40370474, 33.06592105, 35.70024948, 38.30545618, 40.88017724, 43.42289595, 45.93191442, 48.40531749, 50.84092608, 53.23623592, 55.58833502, 57.89379002, 60.14848454, 62.34738086, 64.4841523, 66.55058206, 68.53550242, 70.42271143, 72.186164, 73.77520674, 75, 75.5, 76, 76.5, 77, 77.5, 78, 78.5, 79, 79.5, 80, 80.5, 81, 81.5, 82, 82.5, 83, 83.5, 84, 84.5, 85, 85.06158775, 85.17419647, 85.32001934, 85.49270201, 85.68857199, 85.90515139, 86.14062112, 86.39357173, 86.66286929, 86.94757571, 87.2468981, 87.56015475, 87.88675135, 88.22616371, 88.57792504, 88.94161609, 89.31685768, 89.7033046, 90.10064091, 90.50857595, 90.92684119, 91.35518752, 91.79338304, 92.24121114, 92.69846893, 93.16496581, 93.64052229, 94.12496895, 94.61814556, 95.11990022, 95.63008872, 96.14857387, 96.67522499, 97.20991735, 97.7525318, 98.30295432, 98.86107568, 99.42679111, 100},
             // Index 1
@@ -41,9 +44,53 @@ public class Weapon extends Equipment {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.407407407, 4.814814815, 7.222222222, 9.62962963, 12.03703704, 14.44444444, 16.85185185, 19.25925926, 21.66666667, 24.07407407, 26.48148148, 28.88888889, 31.2962963, 33.7037037, 36.11111111, 38.51851852, 40.92592593, 43.33333333, 45.74074074, 48.14814815, 50.55555556, 52.96296296, 55.37037037, 57.77777778, 60.18518519, 62.59259259, 65, 66.66666667, 68.33333333, 70, 71.66666667, 73.33333333, 75, 76.66666667, 78.33333333, 80, 81.66666667, 83.33333333, 85, 86.66666667, 88.33333333, 90, 90.25641026, 90.51282051, 90.76923077, 91.02564103, 91.28205128, 91.53846154, 91.79487179, 92.05128205, 92.30769231, 92.56410256, 92.82051282, 93.07692308, 93.33333333, 93.58974359, 93.84615385, 94.1025641, 94.35897436, 94.61538462, 94.87179487, 95.12820513, 95.38461538, 95.64102564, 95.8974359, 96.15384615, 96.41025641, 96.66666667, 96.92307692, 97.17948718, 97.43589744, 97.69230769, 97.94871795, 98.20512821, 98.46153846, 98.71794872, 98.97435897, 99.23076923, 99.48717949, 99.74358974, 100}
     };
 
+    public Weapon(int index, int infusion, double weight, int durability, SpecialEffect specialEffects, int strengthRequirement, int dexterityRequirement, int faithRequirement, int intelligenceRequirement, int stability, double physicalBaseAttack, double magicBaseAttack, double fireBaseAttack, double lightningBaseAttack, double darkBaseAttack, int bleedBuildup, int poisonBuildup, int frostBuildup, int criticalMod, double physicalBlock, double magicBlock, double fireBlock, double lightningBlock, double darkBlock, double strengthScaling, double dexterityScaling, double intelligenceScaling, double faithScaling, double luckScaling, int physicalSaturationIndex, int magicSaturationIndex, int fireSaturationIndex, int lightningSaturationIndex, int darkSaturationIndex, boolean blessed, boolean hollow, boolean catalyst, boolean infusable) {
+        this.index = index;
+        this.weight = weight;
+        this.durability = durability;
+        this.specialEffects = specialEffects;
+        this.blessed = blessed;
+        this.hollow = hollow;
+        this.catalyst = catalyst;
+        this.strengthRequirement = strengthRequirement;
+        this.dexterityRequirement = dexterityRequirement;
+        this.faithRequirement = faithRequirement;
+        this.intelligenceRequirement = intelligenceRequirement;
+        this.stability = stability;
+        this.infusion = infusion;
+        this.physicalBaseAttack = physicalBaseAttack;
+        this.magicBaseAttack = magicBaseAttack;
+        this.fireBaseAttack = fireBaseAttack;
+        this.lightningBaseAttack = lightningBaseAttack;
+        this.darkBaseAttack = darkBaseAttack;
+        this.bleedBuildup = bleedBuildup;
+        this.poisonBuildup = poisonBuildup;
+        this.frostBuildup = frostBuildup;
+        this.criticalMod = criticalMod;
+        this.physicalBlock = physicalBlock;
+        this.magicBlock = magicBlock;
+        this.fireBlock = fireBlock;
+        this.lightningBlock = lightningBlock;
+        this.darkBlock = darkBlock;
+        this.strengthScaling = strengthScaling;
+        this.dexterityScaling = dexterityScaling;
+        this.intelligenceScaling = intelligenceScaling;
+        this.faithScaling = faithScaling;
+        this.luckScaling = luckScaling;
+        this.physicalSaturationIndex = physicalSaturationIndex;
+        this.magicSaturationIndex = magicSaturationIndex;
+        this.fireSaturationIndex = fireSaturationIndex;
+        this.lightningSaturationIndex = lightningSaturationIndex;
+        this.darkSaturationIndex = darkSaturationIndex;
+        this.infusable = infusable;
+    }
+
     public double calculateBonusPhysicalAttack(int str, int dex, int fth, int luck){
-        if(ignoreScaling){return 0;}
         double scalingCoefficient = 0;
+        if(str>99){str=99;}
+        if(dex>99){dex=99;}
+        if(fth>99){fth=99;}
+        if(luck>99){luck=99;}
 
         scalingCoefficient += strengthScaling/100 * saturationCurves[physicalSaturationIndex][str]/100;
         scalingCoefficient += dexterityScaling/100 * saturationCurves[physicalSaturationIndex][dex]/100;
@@ -60,10 +107,12 @@ public class Weapon extends Equipment {
     }
 
     public double calculateBonusMagicAttack(int inte, int fth){
-        if(ignoreScaling){return 0;}
         double scalingCoefficient = 0;
 
-        if(name == "Golden Ritual Spear"){
+        if(inte>99){inte=99;}
+        if(fth>99){fth=99;}
+
+        if(index == 234567){ // INDEX for "Golden Ritual Spear"
             scalingCoefficient += faithScaling/100 * saturationCurves[magicSaturationIndex][fth]/100;
         }
         else{
@@ -74,8 +123,10 @@ public class Weapon extends Equipment {
     }
 
     public double calculateBonusFireAttack(int inte, int fth){
-        if(ignoreScaling){return 0;}
         double scalingCoefficient = 0;
+
+        if(inte>99){inte=99;}
+        if(fth>99){fth=99;}
 
         scalingCoefficient += faithScaling/100 * saturationCurves[fireSaturationIndex][fth]/100;
         scalingCoefficient += intelligenceScaling/100 * saturationCurves[fireSaturationIndex][inte]/100;
@@ -84,20 +135,20 @@ public class Weapon extends Equipment {
     }
 
     public double calculateBonusLightningAttack(int fth){
-        if(ignoreScaling){return 0;}
         double scalingCoefficient = 0;
+
+        if(fth>99){fth=99;}
 
         scalingCoefficient += faithScaling/100 * saturationCurves[lightningSaturationIndex][fth]/100;
 
         return lightningBaseAttack * scalingCoefficient;
     }
 
-
     public double calculateBonusDarkAttack(int inte, int fth) {
-        if (ignoreScaling) {
-            return 0;
-        }
         double scalingCoefficient = 0;
+
+        if(inte>99){inte=99;}
+        if(fth>99){fth=99;}
 
         scalingCoefficient += faithScaling / 100 * saturationCurves[darkSaturationIndex][fth] / 100;
         scalingCoefficient += intelligenceScaling / 100 * saturationCurves[darkSaturationIndex][inte] / 100;
@@ -105,4 +156,99 @@ public class Weapon extends Equipment {
         return darkBaseAttack * scalingCoefficient;
     }
 
+    public boolean isBlessed() {
+        return blessed;
+    }
+
+    public boolean isHollow() {
+        return hollow;
+    }
+
+    public boolean isCatalyst() {
+        return catalyst;
+    }
+
+    public int getInfusion() {
+        return infusion;
+    }
+
+    public boolean isInfusable() {
+        return infusable;
+    }
+
+    public int getStrengthRequirement() {
+        return strengthRequirement;
+    }
+
+    public int getDexterityRequirement() {
+        return dexterityRequirement;
+    }
+
+    public int getFaithRequirement() {
+        return faithRequirement;
+    }
+
+    public int getIntelligenceRequirement() {
+        return intelligenceRequirement;
+    }
+
+    public int getStability() {
+        return stability;
+    }
+
+    public int getBleedBuildup() {
+        return bleedBuildup;
+    }
+
+    public int getPoisonBuildup() {
+        return poisonBuildup;
+    }
+
+    public int getFrostBuildup() {
+        return frostBuildup;
+    }
+
+    public int getCriticalMod() {
+        return criticalMod;
+    }
+
+    public double getPhysicalBlock() {
+        return physicalBlock;
+    }
+
+    public double getMagicBlock() {
+        return magicBlock;
+    }
+
+    public double getFireBlock() {
+        return fireBlock;
+    }
+
+    public double getLightningBlock() {
+        return lightningBlock;
+    }
+
+    public double getDarkBlock() {
+        return darkBlock;
+    }
+
+    public double getPhysicalBaseAttack() {
+        return physicalBaseAttack;
+    }
+
+    public double getMagicBaseAttack() {
+        return magicBaseAttack;
+    }
+
+    public double getFireBaseAttack() {
+        return fireBaseAttack;
+    }
+
+    public double getLightningBaseAttack() {
+        return lightningBaseAttack;
+    }
+
+    public double getDarkBaseAttack() {
+        return darkBaseAttack;
+    }
 }

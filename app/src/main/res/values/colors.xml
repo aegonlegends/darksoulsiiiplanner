@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorMenu">#807a76</color>
     <color name="colorSubmenu">#aba29d</color>
+
+    <color name="overcumberedRed">#ffcc0000</color>
+    <color name="correctGreen">#ff669900</color>
 </resources>

@@ -18,6 +18,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu" />
 
         <TextView
+            android:id="@+id/topbar_tvEquipLoad"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -25,6 +26,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu" />
 
         <TextView
+            android:id="@+id/topbar_tvEquipLoadPercent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -181,6 +183,7 @@
                         android:id="@+id/tvWeaponL1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
                         android:text="Left 1"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
@@ -302,7 +305,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Spell"
+                android:text="Spells"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
             <Spinner
@@ -311,7 +314,112 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/spellNames"
                 android:spinnerMode="dialog"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
+            <Spinner
+                android:id="@+id/sSpell14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spellNames"
+                android:spinnerMode="dialog"
+                android:textAlignment="center"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 

@@ -1,6 +1,7 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 import android.content.Context;
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -18,7 +19,7 @@ public class CharEditStatsFragment extends Fragment {
     boolean updatingViews = false;
     int [] editTextIds = new int[]{R.id.etName, R.id.etVIG, R.id.etATT, R.id.etEND, R.id.etVIT, R.id.etSTR, R.id.etDEX, R.id.etINT, R.id.etFTH, R.id.etLCK},
     spinnerIds = new int[]{R.id.sClass, R.id.sCovenant},
-    textViewIds = new int[]{R.id.tvTotalVIG, R.id.tvTotalATT, R.id.tvTotalEND, R.id.tvTotalVIT, R.id.tvTotalSTR, R.id.tvTotalDEX, R.id.tvTotalINT, R.id.tvTotalFTH, R.id.tvTotalLCK};
+    textViewIds = new int[]{R.id.tvLevel, R.id.tvTotalVIG, R.id.tvTotalATT, R.id.tvTotalEND, R.id.tvTotalVIT, R.id.tvTotalSTR, R.id.tvTotalDEX, R.id.tvTotalINT, R.id.tvTotalFTH, R.id.tvTotalLCK};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,27 +27,28 @@ public class CharEditStatsFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_char_edit_stats, container, false);
 
+        FocusChangedListener etListener = new FocusChangedListener();
+        ItemSelectedListener sListener = new ItemSelectedListener();
+
         for (int id : editTextIds) {
             EditText textfield = rootView.findViewById(id);
             textfield.setTransformationMethod(null);
-            textfield.setOnFocusChangeListener(new FocusChangedListener());
+            textfield.setOnFocusChangeListener(etListener);
         }
 
         for (int id : spinnerIds) {
             Spinner selectbox = rootView.findViewById(id);
-            selectbox.setOnItemSelectedListener(new ItemSelectedListener());
+            selectbox.setOnItemSelectedListener(sListener);
         }
 
         updateData(rootView);
         return rootView;
     }
 
-    @Override
+    /*@Override
     public void onDestroyView(){
-        EditText textfield = getView().findViewById(R.id.etName);
-
         super.onDestroyView();
-    }
+    }*/
 
     private void updateData(View view) {
         Character c = fListener.getCharacter();
@@ -58,7 +60,7 @@ public class CharEditStatsFragment extends Fragment {
                 c.getClasse().getIndex(),
                 c.getCovenant()};
 
-        int[] bonusStats = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0}; // Placeholder until Armor implementation is ready
+        int[] bonusStats = new int[] {c.getBonusStat(Character.VIGOR), c.getBonusStat(Character.ATTUNEMENT), c.getBonusStat(Character.ENDURANCE), c.getBonusStat(Character.VITALITY), c.getBonusStat(Character.STRENGTH), c.getBonusStat(Character.DEXTERITY), c.getBonusStat(Character.INTELLIGENCE), c.getBonusStat(Character.FAITH), c.getBonusStat(Character.LUCK)};
 
         updatingViews = true;
         for (int i = 0; i < editTextIds.length; i++){
@@ -75,9 +77,19 @@ public class CharEditStatsFragment extends Fragment {
             }
         }
 
-        for (int i = 0; i < textViewIds.length; i++){
-            TextView label = view.findViewById(textViewIds[i]);
-            String stat = String.format("%d", stats[i] + bonusStats[i]);
+        TextView label = view.findViewById(textViewIds[0]);
+        label.setText(String.format("Level %d", c.getLevel()));
+
+        for (int i = 0; i < stats.length; i++){
+            label = view.findViewById(textViewIds[i+1]);
+            String stat;
+            if(stats[i] + bonusStats[i] <= 99) {
+                stat = String.format("%d", stats[i] + bonusStats[i]);
+            }
+            else{
+                stat = String.format("%d", 99);
+            }
+
 
             if(!(label.getText().toString().equals(stat))){ // if current text is different then replace it
                 label.setText(stat);
@@ -105,6 +117,14 @@ public class CharEditStatsFragment extends Fragment {
         fListener = (CharEditFragmentListener) context;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser == false || getView() == null){
+            return;
+        }
+        updateData();
+    }
     private class FocusChangedListener implements View.OnFocusChangeListener {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {

@@ -2,11 +2,12 @@ package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 public class Armor extends Equipment {
     private int type;
-    private float physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption,fireAbsorption,lightningAbsorption,darkAbsorption, bleedResistance, poisonResistance, frostResistance, curseResistance;
-    static public int TYPE_HELM = 0, TYPE_CHESTPIECE = 1, TYPE_GAUNTLETS = 2, TYPE_BOOTS = 3;
+    private double physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption,fireAbsorption,lightningAbsorption,darkAbsorption, poise;
+    int bleedResistance, poisonResistance, frostResistance, curseResistance;
+    static final public int TYPE_HELM = 0, TYPE_CHESTPIECE = 1, TYPE_GAUNTLETS = 2, TYPE_LEGGINGS = 3;
 
-    public Armor(String name, float weight, int durability, SpecialEffect[] specialEffects, int type, float physicalAbsorption, float strikeAbsorption, float slashAbsorption, float thrustAbsorption, float magicAbsorption, float fireAbsorption, float lightningAbsorption, float darkAbsorption, float bleedResistance, float poisonResistance, float frostResistance, float curseResistance) {
-        this.name = name;
+    public Armor(int index, double weight, int durability, SpecialEffect specialEffects, int type, double physicalAbsorption, double strikeAbsorption, double slashAbsorption, double thrustAbsorption, double magicAbsorption, double fireAbsorption, double lightningAbsorption, double darkAbsorption, int bleedResistance, int poisonResistance, int frostResistance, int curseResistance, double poise) {
+        this.index = index;
         this.weight = weight;
         this.durability = durability;
         this.specialEffects = specialEffects;
@@ -23,57 +24,62 @@ public class Armor extends Equipment {
         this.poisonResistance = poisonResistance;
         this.frostResistance = frostResistance;
         this.curseResistance = curseResistance;
+        this.poise = poise;
     }
 
     public int getType() {
         return type;
     }
 
-    public float getPhysicalAbsorption() {
+    public double getPhysicalAbsorption() {
         return physicalAbsorption;
     }
 
-    public float getStrikeAbsorption() {
+    public double getStrikeAbsorption() {
         return strikeAbsorption;
     }
 
-    public float getSlashAbsorption() {
+    public double getSlashAbsorption() {
         return slashAbsorption;
     }
 
-    public float getThrustAbsorption() {
+    public double getThrustAbsorption() {
         return thrustAbsorption;
     }
 
-    public float getMagicAbsorption() {
+    public double getMagicAbsorption() {
         return magicAbsorption;
     }
 
-    public float getFireAbsorption() {
+    public double getFireAbsorption() {
         return fireAbsorption;
     }
 
-    public float getLightningAbsorption() {
+    public double getLightningAbsorption() {
         return lightningAbsorption;
     }
 
-    public float getDarkAbsorption() {
+    public double getDarkAbsorption() {
         return darkAbsorption;
     }
 
-    public float getBleedResistance() {
+    public double getBleedResistance() {
         return bleedResistance;
     }
 
-    public float getPoisonResistance() {
+    public double getPoisonResistance() {
         return poisonResistance;
     }
 
-    public float getFrostResistance() {
+    public double getFrostResistance() {
         return frostResistance;
     }
 
-    public float getCurseResistance() {
+    public double getCurseResistance() {
         return curseResistance;
+    }
+
+    public double getPoise() {
+        return poise;
     }
 }

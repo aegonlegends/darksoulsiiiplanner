@@ -26,42 +26,46 @@
     </string-array>
 
     <string-array name="armorHelms">
-        <item>None</item>
-        <item>Knight Helmet</item>
-        <item>Herald Helmet</item>
+        <item>Naked</item>
+        <item>Knight Helm</item>
+        <item>Herald Helm</item>
     </string-array>
 
     <string-array name="armorChests">
-        <item>None</item>
+        <item>Naked</item>
         <item>Knight Armor</item>
         <item>Herald Armor</item>
     </string-array>
 
     <string-array name="armorGauntlets">
-        <item>None</item>
+        <item>Naked</item>
         <item>Knight Gauntlets</item>
-        <item>Herald Gauntlets</item>
+        <item>Herald Gloves</item>
     </string-array>
 
     <string-array name="armorLeggings">
-        <item>None</item>
-        <item>Knight Greaves</item>
-        <item>Herald Leggings</item>
+        <item>Naked</item>
+        <item>Knight Leggings</item>
+        <item>Herald Trousers</item>
     </string-array>
 
     <string-array name="ringNames">
         <item>None</item>
         <item>Ring of Favor</item>
         <item>Ring of Steel Protection</item>
+        <item>Priestess Ring</item>
+        <item>Covetous Silver Serpent Ring</item>
     </string-array>
 
     <string-array name="weaponNames">
         <item>Bare Fists</item>
         <item>Broadsword</item>
-        <item>Havel\'s Greatshield</item>
+        <item>Kite Shield</item>
+        <item>Talisman</item>
     </string-array>
 
     <string-array name="spellNames">
+        <item>None</item>
         <item>Lightning Spear</item>
         <item>Great Heal</item>
     </string-array>

@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                    android:inputType="numberPassword"
+                    android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -145,8 +145,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -183,8 +183,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -220,8 +220,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -256,8 +256,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:textAlignment="center" />
 
                 <TextView
@@ -291,8 +291,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -327,8 +327,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                      android:inputType="numberPassword"
+
+                      android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -363,8 +363,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                    android:inputType="numberPassword"
+
+                    android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 
@@ -399,8 +399,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_width="0dp"
-                      
-                    android:inputType="numberPassword"
+
+                    android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center" />
 

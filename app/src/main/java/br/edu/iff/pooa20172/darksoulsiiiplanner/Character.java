@@ -1,12 +1,21 @@
 
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-public class Character {
+import android.provider.ContactsContract;
+
+import java.io.Serializable;
+
+public class Character implements Serializable {
     private String name;
     private Classe classe;
     private int covenant, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck;
     private Weapon leftHand1, leftHand2, leftHand3, rightHand1, rightHand2, rightHand3;
-    private Armor helm, chest, gauntlets, boots;
+    private Armor helm, chest, gauntlets, leggings;
+    private Ring ring1, ring2, ring3, ring4;
+    private boolean twoHanded;
+    private int[] spells;
+
+    public static final int VIGOR=0, ATTUNEMENT=1, ENDURANCE=2, VITALITY=3, STRENGTH=4, DEXTERITY=5, INTELLIGENCE=6, FAITH=7, LUCK=8;
     private static int[] hpValues = {0,0,0,0,0,0,0,0, 381, 403, 427, 454, 483, 515, 550, 594, 638, 681, 723, 764, 804, 842, 879, 914, 947, 977, 1000, 1019, 1038, 1056, 1074, 1092, 1109, 1125, 1141, 1157, 1172, 1186, 1200, 1213, 1226, 1238, 1249, 1260, 1269, 1278, 1285, 1292, 1297, 1300, 1302, 1304, 1307, 1309, 1312, 1314, 1316, 1319, 1321, 1323, 1326, 1328, 1330, 1333, 1335, 1337, 1340, 1342, 1344, 1346, 1348, 1351, 1353, 1355, 1357, 1359, 1361, 1363, 1365, 1367, 1369, 1371, 1373, 1375, 1377, 1379, 1381, 1383, 1385, 1386, 1388, 1390, 1391, 1393, 1395, 1396, 1397, 1399, 1400};
     private static int[] fpValues = {0,0,0,0,0, 72, 77, 82, 87, 93, 98, 103, 109, 114, 120, 124, 130, 136, 143, 150, 157, 165, 173, 181, 189, 198, 206, 215, 224, 233, 242, 251, 260, 270, 280, 283, 286, 289, 293, 296, 299, 302, 305, 309, 312, 315, 318, 320, 323, 326, 329, 332, 334, 337, 339, 342, 344, 346, 348, 350, 352, 355, 358, 361, 364, 366, 369, 372, 375, 377, 380, 383, 385, 388, 391, 394, 396, 399, 402, 404, 407, 409, 412, 415, 417, 420, 422, 425, 427, 430, 432, 434, 437, 439, 441, 444, 446, 448, 450};
     private static int[] staminaValues = {0,0,0,0,0,0,0,0, 90, 94, 95, 97, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 125, 127, 129, 132, 134, 136, 139, 141, 144, 146, 149, 152, 154, 157, 160};
@@ -25,25 +34,64 @@ public class Character {
         this.intelligence = classe.getIntelligence();
         this.faith = classe.getFaith();
         this.luck = classe.getLuck();
+        this.twoHanded = false;
+        this.spells = new int[14];
+        setDefaultEquip();
     }
 
-    public Character(String name, Classe classe, int covenant, int vig, int att, int end, int vit, int str, int dex, int inte, int fth, int luck) {
+    public Character(String name, int covenant, Classe classe, int vigor, int attunement, int endurance, int vitality, int strength, int dexterity, int intelligence, int faith, int luck, Weapon leftHand1, Weapon leftHand2, Weapon leftHand3, Weapon rightHand1, Weapon rightHand2, Weapon rightHand3, Armor helm, Armor chest, Armor gauntlets, Armor leggings, Ring ring1, Ring ring2, Ring ring3, Ring ring4, boolean twoHanded, int[] spells) {
         this.name = name;
         this.classe = classe;
         this.covenant = covenant;
-        this.vigor = vig;
-        this.attunement = att;
-        this.endurance = end;
-        this.vitality = vit;
-        this.strength = str;
-        this.dexterity = dex;
-        this.intelligence = inte;
-        this.faith = fth;
+        this.vigor = vigor;
+        this.attunement = attunement;
+        this.endurance = endurance;
+        this.vitality = vitality;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.intelligence = intelligence;
+        this.faith = faith;
         this.luck = luck;
+        this.leftHand1 = leftHand1;
+        this.leftHand2 = leftHand2;
+        this.leftHand3 = leftHand3;
+        this.rightHand1 = rightHand1;
+        this.rightHand2 = rightHand2;
+        this.rightHand3 = rightHand3;
+        this.helm = helm;
+        this.chest = chest;
+        this.gauntlets = gauntlets;
+        this.leggings = leggings;
+        this.ring1 = ring1;
+        this.ring2 = ring2;
+        this.ring3 = ring3;
+        this.ring4 = ring4;
+        this.twoHanded = twoHanded;
+        this.spells = spells;
     }
 
-    int calculateHP(int bonusVigor){
-        int vigor = this.vigor + bonusVigor;
+    private void setDefaultEquip(){
+        setLeftHand1(Database.getWeapon(0, Weapon.REGULAR));
+        setLeftHand2(Database.getWeapon(0, Weapon.REGULAR));
+        setLeftHand3(Database.getWeapon(0, Weapon.REGULAR));
+
+        setRightHand1(Database.getWeapon(0, Weapon.REGULAR));
+        setRightHand2(Database.getWeapon(0, Weapon.REGULAR));
+        setRightHand3(Database.getWeapon(0, Weapon.REGULAR));
+
+        setHelm(Database.getArmor(0, Armor.TYPE_HELM));
+        setChest(Database.getArmor(0, Armor.TYPE_CHESTPIECE));
+        setGauntlets(Database.getArmor(0, Armor.TYPE_GAUNTLETS));
+        setLeggings(Database.getArmor(0, Armor.TYPE_LEGGINGS));
+
+        setRing1(Database.getRing(0));
+        setRing2(Database.getRing(0));
+        setRing3(Database.getRing(0));
+        setRing4(Database.getRing(0));
+    }
+
+    int calculateHP(){
+        int vigor = this.vigor + getBonusStat(VIGOR);
         if(vigor>99){ vigor = 99;}
 
         return hpValues[vigor-1];
@@ -53,8 +101,8 @@ public class Character {
         return fpValues[attunement-1];
     }
 
-    int calculateStamina(int bonusEndurance){
-        int endurance = this.endurance + bonusEndurance;
+    int calculateStamina(){
+        int endurance = this.endurance + getBonusStat(ENDURANCE);
         if(endurance>99){ endurance = 99;}
 
         if(endurance > 40){
@@ -63,108 +111,115 @@ public class Character {
         return staminaValues[endurance];
     }
 
-    float calculateEquipLoad(int bonusVitality){
-        int vitality = this.vitality + bonusVitality;
+    double calculateEquipLoad(){
+        int vitality = this.vitality + getBonusStat(VITALITY);
         if(vitality>99){ vitality= 99;}
 
         return 40 + vitality;
     }
 
     int calculateItemDisc(){
+        int luck = this.luck + getBonusStat(LUCK);
+        if(luck>99){ luck= 99;}
+
         return 100 + luck;
     }
 
     int calculateAttSlots(){
-        int i=0, slots=0;
-        while(attSlotsBreakpoints[i] <= attunement){
-            slots++;
-            i++;
+        int attunement = this.attunement + getBonusStat(ATTUNEMENT);
+        if(attunement>99){ attunement= 99;}
+
+        for(int i=attSlotsBreakpoints.length-1; i>=0; i--){
+            if(attunement >= attSlotsBreakpoints[i]){
+                return i+1;
+            }
         }
-        return slots;
+
+        return 0;
     }
 
     int calculatePhysicalDefenses(){
         int def = 0;
-        def += vigor * 0.4;
-        def += endurance * 0.4;
-        def += attunement * 0.4;
-        def += vitality * 1.5;
-        def += strength * 0.73;
-        def += dexterity * 0.4;
-        def += intelligence * 0.4;
-        def += faith * 0.4;
-        def += luck * 0.4;
+        def += (vigor + getBonusStat(VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(VITALITY)) * 1.5;
+        def += (strength + getBonusStat(STRENGTH)) * 0.73;
+        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(FAITH)) * 0.4;
+        def += (luck + getBonusStat(LUCK)) * 0.4;
         return def;
     }
 
     int calculateMagicDefense(){
         int def = 0;
-        def += vigor * 0.4;
-        def += endurance * 0.4;
-        def += attunement * 0.4;
-        def += vitality * 0.4;
-        def += strength * 0.4;
-        def += dexterity * 0.4;
-        def += intelligence * 1.1;
-        def += faith * 0.4;
-        def += luck * 0.4;
+        def += (vigor + getBonusStat(VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(VITALITY)) * 0.4;
+        def += (strength + getBonusStat(STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(INTELLIGENCE)) * 1.1;
+        def += (faith + getBonusStat(FAITH)) * 0.4;
+        def += (luck + getBonusStat(LUCK)) * 0.4;
         return def;
     }
 
     int calculateFireDefense(){
         int def = 0;
-        def += vigor * 0.4;
-        def += endurance * 0.4;
-        def += attunement * 0.4;
-        def += vitality * 0.4;
-        def += strength * 1.1;
-        def += dexterity * 0.4;
-        def += intelligence * 1.1;
-        def += faith * 0.4;
-        def += luck * 0.4;
+        def += (vigor + getBonusStat(VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(VITALITY)) * 0.4;
+        def += (strength + getBonusStat(STRENGTH)) * 1.1;
+        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(FAITH)) * 0.4;
+        def += (luck + getBonusStat(LUCK)) * 0.4;
         return def;
     }
 
     int calculateLightningDefense(){
         int def = 0;
-        def += vigor * 0.4;
-        def += endurance * 1.1;
-        def += attunement * 0.4;
-        def += vitality * 0.4;
-        def += strength * 0.4;
-        def += dexterity * 0.4;
-        def += intelligence * 0.4;
-        def += faith * 0.4;
-        def += luck * 0.4;
+        def += (vigor + getBonusStat(VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(ENDURANCE)) * 1.1;
+        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(VITALITY)) * 0.4;
+        def += (strength + getBonusStat(STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(FAITH)) * 0.4;
+        def += (luck + getBonusStat(LUCK)) * 0.4;
         return def;
     }
 
     int calculateDarkDefense(){
         int def = 0;
-        def += vigor * 0.4;
-        def += endurance * 0.4;
-        def += attunement * 0.4;
-        def += vitality * 0.4;
-        def += strength * 0.4;
-        def += dexterity * 0.4;
-        def += intelligence * 1.1;
-        def += faith * 1.1;
-        def += luck * 0.4;
+        def += (vigor + getBonusStat(VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(VITALITY)) * 0.4;
+        def += (strength + getBonusStat(STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(FAITH)) * 1.1;
+        def += (luck + getBonusStat(LUCK)) * 0.4;
         return def;
     }
 
     int calculateBleedResistance(){
         int resist=0;
 
-        resist += vigor * 0.2;
-        resist += endurance * 1.1;
-        resist += attunement * 0.2;
-        resist += vitality * 0.2;
-        resist += strength * 0.2;
-        resist += dexterity * 0.2;
-        resist += intelligence * 0.2;
-        resist += faith * 0.2;
-        resist += luck * 0.2;
+        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(ENDURANCE)) * 1.1;
+        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(FAITH)) * 0.2;
+        resist += (luck + getBonusStat(LUCK)) * 0.2;
 
         return resist;
     }
@@ -172,15 +227,15 @@ public class Character {
     int calculatePoisonResistance(){
         int resist=0;
 
-        resist += vigor * 0.2;
-        resist += endurance * 0.2;
-        resist += attunement * 0.2;
-        resist += vitality * 1.1;
-        resist += strength * 0.2;
-        resist += dexterity * 0.2;
-        resist += intelligence * 0.2;
-        resist += faith * 0.2;
-        resist += luck * 0.2;
+        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(VITALITY)) * 1.1;
+        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(FAITH)) * 0.2;
+        resist += (luck + getBonusStat(LUCK)) * 0.2;
 
         return resist;
     }
@@ -188,15 +243,15 @@ public class Character {
     int calculateFrostResistance(){
         int resist=0;
 
-        resist += vigor * 1.1;
-        resist += endurance * 0.2;
-        resist += attunement * 0.2;
-        resist += vitality * 0.2;
-        resist += strength * 0.2;
-        resist += dexterity * 0.2;
-        resist += intelligence * 0.2;
-        resist += faith * 0.2;
-        resist += luck * 0.2;
+        resist += (vigor + getBonusStat(VIGOR)) * 1.1;
+        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(FAITH)) * 0.2;
+        resist += (luck + getBonusStat(LUCK)) * 0.2;
 
         return resist;
     }
@@ -204,15 +259,15 @@ public class Character {
     int calculateCurseResistance(){
         int resist=0;
 
-        resist += vigor * 0.2;
-        resist += endurance * 0.2;
-        resist += attunement * 0.2;
-        resist += vitality * 0.2;
-        resist += strength * 0.2;
-        resist += dexterity * 0.2;
-        resist += intelligence * 0.2;
-        resist += faith * 0.2;
-        resist += luck * 1.1;
+        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(FAITH)) * 0.2;
+        resist += (luck + getBonusStat(LUCK)) * 1.1;
 
         return resist;
     }
@@ -390,6 +445,147 @@ public class Character {
         this.luck = luck;
     }
 
+    public int getBonusStat(int stat){
+        switch (stat){
+            case VIGOR:
+                return getHelm().getSpecialEffects().getVigor()
+                        + getChest().getSpecialEffects().getVigor()
+                        + getGauntlets().getSpecialEffects().getVigor()
+                        + getLeggings().getSpecialEffects().getVigor()
+                        + getRing1().getSpecialEffects().getVigor()
+                        + getRing2().getSpecialEffects().getVigor()
+                        + getRing3().getSpecialEffects().getVigor()
+                        + getRing4().getSpecialEffects().getVigor()
+                        + getLeftHand1().getSpecialEffects().getVigor()
+                        + getLeftHand2().getSpecialEffects().getVigor()
+                        + getLeftHand3().getSpecialEffects().getVigor()
+                        + getRightHand1().getSpecialEffects().getVigor()
+                        + getRightHand2().getSpecialEffects().getVigor()
+                        + getRightHand3().getSpecialEffects().getVigor();
+            case ATTUNEMENT:
+                return getHelm().getSpecialEffects().getAttunement()
+                        + getChest().getSpecialEffects().getAttunement()
+                        + getGauntlets().getSpecialEffects().getAttunement()
+                        + getLeggings().getSpecialEffects().getAttunement()
+                        + getRing1().getSpecialEffects().getAttunement()
+                        + getRing2().getSpecialEffects().getAttunement()
+                        + getRing3().getSpecialEffects().getAttunement()
+                        + getRing4().getSpecialEffects().getAttunement()
+                        + getLeftHand1().getSpecialEffects().getAttunement()
+                        + getLeftHand2().getSpecialEffects().getAttunement()
+                        + getLeftHand3().getSpecialEffects().getAttunement()
+                        + getRightHand1().getSpecialEffects().getAttunement()
+                        + getRightHand2().getSpecialEffects().getAttunement()
+                        + getRightHand3().getSpecialEffects().getAttunement();
+            case ENDURANCE:
+                return getHelm().getSpecialEffects().getEndurance()
+                        + getChest().getSpecialEffects().getEndurance()
+                        + getGauntlets().getSpecialEffects().getEndurance()
+                        + getLeggings().getSpecialEffects().getEndurance()
+                        + getRing1().getSpecialEffects().getEndurance()
+                        + getRing2().getSpecialEffects().getEndurance()
+                        + getRing3().getSpecialEffects().getEndurance()
+                        + getRing4().getSpecialEffects().getEndurance()
+                        + getLeftHand1().getSpecialEffects().getEndurance()
+                        + getLeftHand2().getSpecialEffects().getEndurance()
+                        + getLeftHand3().getSpecialEffects().getEndurance()
+                        + getRightHand1().getSpecialEffects().getEndurance()
+                        + getRightHand2().getSpecialEffects().getEndurance()
+                        + getRightHand3().getSpecialEffects().getEndurance();
+            case VITALITY:
+                return getHelm().getSpecialEffects().getVitality()
+                        + getChest().getSpecialEffects().getVitality()
+                        + getGauntlets().getSpecialEffects().getVitality()
+                        + getLeggings().getSpecialEffects().getVitality()
+                        + getRing1().getSpecialEffects().getVitality()
+                        + getRing2().getSpecialEffects().getVitality()
+                        + getRing3().getSpecialEffects().getVitality()
+                        + getRing4().getSpecialEffects().getVitality()
+                        + getLeftHand1().getSpecialEffects().getVitality()
+                        + getLeftHand2().getSpecialEffects().getVitality()
+                        + getLeftHand3().getSpecialEffects().getVitality()
+                        + getRightHand1().getSpecialEffects().getVitality()
+                        + getRightHand2().getSpecialEffects().getVitality()
+                        + getRightHand3().getSpecialEffects().getVitality();
+            case STRENGTH:
+                return getHelm().getSpecialEffects().getStrength()
+                        + getChest().getSpecialEffects().getStrength()
+                        + getGauntlets().getSpecialEffects().getStrength()
+                        + getLeggings().getSpecialEffects().getStrength()
+                        + getRing1().getSpecialEffects().getStrength()
+                        + getRing2().getSpecialEffects().getStrength()
+                        + getRing3().getSpecialEffects().getStrength()
+                        + getRing4().getSpecialEffects().getStrength()
+                        + getLeftHand1().getSpecialEffects().getStrength()
+                        + getLeftHand2().getSpecialEffects().getStrength()
+                        + getLeftHand3().getSpecialEffects().getStrength()
+                        + getRightHand1().getSpecialEffects().getStrength()
+                        + getRightHand2().getSpecialEffects().getStrength()
+                        + getRightHand3().getSpecialEffects().getStrength();
+            case DEXTERITY:
+                return getHelm().getSpecialEffects().getDexterity()
+                        + getChest().getSpecialEffects().getDexterity()
+                        + getGauntlets().getSpecialEffects().getDexterity()
+                        + getLeggings().getSpecialEffects().getDexterity()
+                        + getRing1().getSpecialEffects().getDexterity()
+                        + getRing2().getSpecialEffects().getDexterity()
+                        + getRing3().getSpecialEffects().getDexterity()
+                        + getRing4().getSpecialEffects().getDexterity()
+                        + getLeftHand1().getSpecialEffects().getDexterity()
+                        + getLeftHand2().getSpecialEffects().getDexterity()
+                        + getLeftHand3().getSpecialEffects().getDexterity()
+                        + getRightHand1().getSpecialEffects().getDexterity()
+                        + getRightHand2().getSpecialEffects().getDexterity()
+                        + getRightHand3().getSpecialEffects().getDexterity();
+            case INTELLIGENCE:
+                return getHelm().getSpecialEffects().getIntelligence()
+                        + getChest().getSpecialEffects().getIntelligence()
+                        + getGauntlets().getSpecialEffects().getIntelligence()
+                        + getLeggings().getSpecialEffects().getIntelligence()
+                        + getRing1().getSpecialEffects().getIntelligence()
+                        + getRing2().getSpecialEffects().getIntelligence()
+                        + getRing3().getSpecialEffects().getIntelligence()
+                        + getRing4().getSpecialEffects().getIntelligence()
+                        + getLeftHand1().getSpecialEffects().getIntelligence()
+                        + getLeftHand2().getSpecialEffects().getIntelligence()
+                        + getLeftHand3().getSpecialEffects().getIntelligence()
+                        + getRightHand1().getSpecialEffects().getIntelligence()
+                        + getRightHand2().getSpecialEffects().getIntelligence()
+                        + getRightHand3().getSpecialEffects().getIntelligence();
+            case FAITH:
+                return getHelm().getSpecialEffects().getFaith()
+                        + getChest().getSpecialEffects().getFaith()
+                        + getGauntlets().getSpecialEffects().getFaith()
+                        + getLeggings().getSpecialEffects().getFaith()
+                        + getRing1().getSpecialEffects().getFaith()
+                        + getRing2().getSpecialEffects().getFaith()
+                        + getRing3().getSpecialEffects().getFaith()
+                        + getRing4().getSpecialEffects().getFaith()
+                        + getLeftHand1().getSpecialEffects().getFaith()
+                        + getLeftHand2().getSpecialEffects().getFaith()
+                        + getLeftHand3().getSpecialEffects().getFaith()
+                        + getRightHand1().getSpecialEffects().getFaith()
+                        + getRightHand2().getSpecialEffects().getFaith()
+                        + getRightHand3().getSpecialEffects().getFaith();
+            case LUCK:
+                return getHelm().getSpecialEffects().getLuck()
+                        + getChest().getSpecialEffects().getLuck()
+                        + getGauntlets().getSpecialEffects().getLuck()
+                        + getLeggings().getSpecialEffects().getLuck()
+                        + getRing1().getSpecialEffects().getLuck()
+                        + getRing2().getSpecialEffects().getLuck()
+                        + getRing3().getSpecialEffects().getLuck()
+                        + getRing4().getSpecialEffects().getLuck()
+                        + getLeftHand1().getSpecialEffects().getLuck()
+                        + getLeftHand2().getSpecialEffects().getLuck()
+                        + getLeftHand3().getSpecialEffects().getLuck()
+                        + getRightHand1().getSpecialEffects().getLuck()
+                        + getRightHand2().getSpecialEffects().getLuck()
+                        + getRightHand3().getSpecialEffects().getLuck();
+            default: throw new IllegalArgumentException();
+        }
+    }
+
     public Weapon getLeftHand1() {
         return leftHand1;
     }
@@ -443,9 +639,6 @@ public class Character {
     }
 
     public void setHelm(Armor helm) {
-        if (helm.getType() != Armor.TYPE_HELM) {
-            throw new IllegalArgumentException();
-        }
         this.helm = helm;
     }
 
@@ -454,9 +647,6 @@ public class Character {
     }
 
     public void setChest(Armor chest) {
-        if (chest.getType() != Armor.TYPE_CHESTPIECE) {
-            throw new IllegalArgumentException();
-        }
         this.chest = chest;
     }
 
@@ -465,20 +655,62 @@ public class Character {
     }
 
     public void setGauntlets(Armor gauntlets) {
-        if (gauntlets.getType() != Armor.TYPE_GAUNTLETS) {
-            throw new IllegalArgumentException();
-        }
         this.gauntlets = gauntlets;
     }
 
-    public Armor getBoots() {
-        return boots;
+    public Armor getLeggings() {
+        return leggings;
     }
 
-    public void setBoots(Armor boots) {
-        if (boots.getType() != Armor.TYPE_BOOTS) {
-            throw new IllegalArgumentException();
-        }
-        this.boots = boots;
+    public void setLeggings(Armor leggings) {
+        this.leggings = leggings;
+    }
+
+    public Ring getRing1() {
+        return ring1;
+    }
+
+    public void setRing1(Ring ring1) {
+        this.ring1 = ring1;
+    }
+
+    public Ring getRing2() {
+        return ring2;
+    }
+
+    public void setRing2(Ring ring2) {
+        this.ring2 = ring2;
+    }
+
+    public Ring getRing3() {
+        return ring3;
+    }
+
+    public void setRing3(Ring ring3) {
+        this.ring3 = ring3;
+    }
+
+    public Ring getRing4() {
+        return ring4;
+    }
+
+    public void setRing4(Ring ring4) {
+        this.ring4 = ring4;
+    }
+
+    public boolean isTwoHanded() {
+        return twoHanded;
+    }
+
+    public void setTwoHanded(boolean twoHanded) {
+        this.twoHanded = twoHanded;
+    }
+
+    public int[] getSpells() {
+        return spells;
+    }
+
+    public void setSpells(int[] spells) {
+        this.spells = spells;
     }
 }
