@@ -1,9 +1,17 @@
 
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-import android.provider.ContactsContract;
-
 import java.io.Serializable;
+
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ATTUNEMENT;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.DEXTERITY;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ENDURANCE;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.FAITH;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.INTELLIGENCE;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.LUCK;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.STRENGTH;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VIGOR;
+import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VITALITY;
 
 public class Character implements Serializable {
     private String name;
@@ -15,7 +23,6 @@ public class Character implements Serializable {
     private boolean twoHanded;
     private int[] spells;
 
-    public static final int VIGOR=0, ATTUNEMENT=1, ENDURANCE=2, VITALITY=3, STRENGTH=4, DEXTERITY=5, INTELLIGENCE=6, FAITH=7, LUCK=8;
     private static int[] hpValues = {0,0,0,0,0,0,0,0, 381, 403, 427, 454, 483, 515, 550, 594, 638, 681, 723, 764, 804, 842, 879, 914, 947, 977, 1000, 1019, 1038, 1056, 1074, 1092, 1109, 1125, 1141, 1157, 1172, 1186, 1200, 1213, 1226, 1238, 1249, 1260, 1269, 1278, 1285, 1292, 1297, 1300, 1302, 1304, 1307, 1309, 1312, 1314, 1316, 1319, 1321, 1323, 1326, 1328, 1330, 1333, 1335, 1337, 1340, 1342, 1344, 1346, 1348, 1351, 1353, 1355, 1357, 1359, 1361, 1363, 1365, 1367, 1369, 1371, 1373, 1375, 1377, 1379, 1381, 1383, 1385, 1386, 1388, 1390, 1391, 1393, 1395, 1396, 1397, 1399, 1400};
     private static int[] fpValues = {0,0,0,0,0, 72, 77, 82, 87, 93, 98, 103, 109, 114, 120, 124, 130, 136, 143, 150, 157, 165, 173, 181, 189, 198, 206, 215, 224, 233, 242, 251, 260, 270, 280, 283, 286, 289, 293, 296, 299, 302, 305, 309, 312, 315, 318, 320, 323, 326, 329, 332, 334, 337, 339, 342, 344, 346, 348, 350, 352, 355, 358, 361, 364, 366, 369, 372, 375, 377, 380, 383, 385, 388, 391, 394, 396, 399, 402, 404, 407, 409, 412, 415, 417, 420, 422, 425, 427, 430, 432, 434, 437, 439, 441, 444, 446, 448, 450};
     private static int[] staminaValues = {0,0,0,0,0,0,0,0, 90, 94, 95, 97, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 125, 127, 129, 132, 134, 136, 139, 141, 144, 146, 149, 152, 154, 157, 160};
@@ -139,7 +146,7 @@ public class Character implements Serializable {
     }
 
     int calculatePhysicalDefenses(){
-        int def = 0;
+        double def = 0;
         def += (vigor + getBonusStat(VIGOR)) * 0.4;
         def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
         def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
@@ -149,11 +156,11 @@ public class Character implements Serializable {
         def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
         def += (faith + getBonusStat(FAITH)) * 0.4;
         def += (luck + getBonusStat(LUCK)) * 0.4;
-        return def;
+        return (int) Math.floor(def);
     }
 
     int calculateMagicDefense(){
-        int def = 0;
+        double def = 0;
         def += (vigor + getBonusStat(VIGOR)) * 0.4;
         def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
         def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
@@ -163,11 +170,11 @@ public class Character implements Serializable {
         def += (intelligence + getBonusStat(INTELLIGENCE)) * 1.1;
         def += (faith + getBonusStat(FAITH)) * 0.4;
         def += (luck + getBonusStat(LUCK)) * 0.4;
-        return def;
+        return (int) Math.floor(def);
     }
 
     int calculateFireDefense(){
-        int def = 0;
+        double def = 0;
         def += (vigor + getBonusStat(VIGOR)) * 0.4;
         def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
         def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
@@ -177,11 +184,11 @@ public class Character implements Serializable {
         def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
         def += (faith + getBonusStat(FAITH)) * 0.4;
         def += (luck + getBonusStat(LUCK)) * 0.4;
-        return def;
+        return (int) Math.floor(def);
     }
 
     int calculateLightningDefense(){
-        int def = 0;
+        double def = 0;
         def += (vigor + getBonusStat(VIGOR)) * 0.4;
         def += (endurance + getBonusStat(ENDURANCE)) * 1.1;
         def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
@@ -191,11 +198,11 @@ public class Character implements Serializable {
         def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
         def += (faith + getBonusStat(FAITH)) * 0.4;
         def += (luck + getBonusStat(LUCK)) * 0.4;
-        return def;
+        return (int) Math.floor(def);
     }
 
     int calculateDarkDefense(){
-        int def = 0;
+        double def = 0;
         def += (vigor + getBonusStat(VIGOR)) * 0.4;
         def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
         def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
@@ -205,11 +212,11 @@ public class Character implements Serializable {
         def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
         def += (faith + getBonusStat(FAITH)) * 1.1;
         def += (luck + getBonusStat(LUCK)) * 0.4;
-        return def;
+        return (int) Math.floor(def);
     }
 
     int calculateBleedResistance(){
-        int resist=0;
+        double resist = 0;
 
         resist += (vigor + getBonusStat(VIGOR)) * 0.2;
         resist += (endurance + getBonusStat(ENDURANCE)) * 1.1;
@@ -221,11 +228,11 @@ public class Character implements Serializable {
         resist += (faith + getBonusStat(FAITH)) * 0.2;
         resist += (luck + getBonusStat(LUCK)) * 0.2;
 
-        return resist;
+        return (int) Math.floor(resist);
     }
 
     int calculatePoisonResistance(){
-        int resist=0;
+        double resist = 0;
 
         resist += (vigor + getBonusStat(VIGOR)) * 0.2;
         resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
@@ -237,11 +244,11 @@ public class Character implements Serializable {
         resist += (faith + getBonusStat(FAITH)) * 0.2;
         resist += (luck + getBonusStat(LUCK)) * 0.2;
 
-        return resist;
+        return (int) Math.floor(resist);
     }
 
     int calculateFrostResistance(){
-        int resist=0;
+        double resist = 0;
 
         resist += (vigor + getBonusStat(VIGOR)) * 1.1;
         resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
@@ -253,11 +260,11 @@ public class Character implements Serializable {
         resist += (faith + getBonusStat(FAITH)) * 0.2;
         resist += (luck + getBonusStat(LUCK)) * 0.2;
 
-        return resist;
+        return (int) Math.floor(resist);
     }
 
     int calculateCurseResistance(){
-        int resist=0;
+        double resist = 0;
 
         resist += (vigor + getBonusStat(VIGOR)) * 0.2;
         resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
@@ -269,7 +276,7 @@ public class Character implements Serializable {
         resist += (faith + getBonusStat(FAITH)) * 0.2;
         resist += (luck + getBonusStat(LUCK)) * 1.1;
 
-        return resist;
+        return (int) Math.floor(resist);
     }
 
     // Getters and Setters
@@ -582,6 +589,341 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getLuck()
                         + getRightHand2().getSpecialEffects().getLuck()
                         + getRightHand3().getSpecialEffects().getLuck();
+            case SpecialEffect.ATTUNEMENT_SLOTS:
+                return getHelm().getSpecialEffects().getAttunementSlot()
+                        * getChest().getSpecialEffects().getAttunementSlot()
+                        * getGauntlets().getSpecialEffects().getAttunementSlot()
+                        * getLeggings().getSpecialEffects().getAttunementSlot()
+                        * getRing1().getSpecialEffects().getAttunementSlot()
+                        * getRing2().getSpecialEffects().getAttunementSlot()
+                        * getRing3().getSpecialEffects().getAttunementSlot()
+                        * getRing4().getSpecialEffects().getAttunementSlot()
+                        * getLeftHand1().getSpecialEffects().getAttunementSlot()
+                        * getLeftHand2().getSpecialEffects().getAttunementSlot()
+                        * getLeftHand3().getSpecialEffects().getAttunementSlot()
+                        * getRightHand1().getSpecialEffects().getAttunementSlot()
+                        * getRightHand2().getSpecialEffects().getAttunementSlot()
+                        * getRightHand3().getSpecialEffects().getAttunementSlot();
+            case SpecialEffect.POISE:
+                return getHelm().getSpecialEffects().getPoise()
+                        * getChest().getSpecialEffects().getPoise()
+                        * getGauntlets().getSpecialEffects().getPoise()
+                        * getLeggings().getSpecialEffects().getPoise()
+                        * getRing1().getSpecialEffects().getPoise()
+                        * getRing2().getSpecialEffects().getPoise()
+                        * getRing3().getSpecialEffects().getPoise()
+                        * getRing4().getSpecialEffects().getPoise()
+                        * getLeftHand1().getSpecialEffects().getPoise()
+                        * getLeftHand2().getSpecialEffects().getPoise()
+                        * getLeftHand3().getSpecialEffects().getPoise()
+                        * getRightHand1().getSpecialEffects().getPoise()
+                        * getRightHand2().getSpecialEffects().getPoise()
+                        * getRightHand3().getSpecialEffects().getPoise();
+
+            case SpecialEffect.ITEM_DISCOVERY:
+                return getHelm().getSpecialEffects().getItemDiscovery()
+                        * getChest().getSpecialEffects().getItemDiscovery()
+                        * getGauntlets().getSpecialEffects().getItemDiscovery()
+                        * getLeggings().getSpecialEffects().getItemDiscovery()
+                        * getRing1().getSpecialEffects().getItemDiscovery()
+                        * getRing2().getSpecialEffects().getItemDiscovery()
+                        * getRing3().getSpecialEffects().getItemDiscovery()
+                        * getRing4().getSpecialEffects().getItemDiscovery()
+                        * getLeftHand1().getSpecialEffects().getItemDiscovery()
+                        * getLeftHand2().getSpecialEffects().getItemDiscovery()
+                        * getLeftHand3().getSpecialEffects().getItemDiscovery()
+                        * getRightHand1().getSpecialEffects().getItemDiscovery()
+                        * getRightHand2().getSpecialEffects().getItemDiscovery()
+                        * getRightHand3().getSpecialEffects().getItemDiscovery();
+            default: throw new IllegalArgumentException();
+        }
+    }
+
+    public double getBonusMultipliers(int multiplier){
+        double abs;
+        double[] nums;
+
+        switch (multiplier){
+            case SpecialEffect.DAMAGE_MULTIPLIER:
+                return getHelm().getSpecialEffects().getDamagePercent()
+                        + getChest().getSpecialEffects().getDamagePercent()
+                        + getGauntlets().getSpecialEffects().getDamagePercent()
+                        + getLeggings().getSpecialEffects().getDamagePercent()
+                        + getRing1().getSpecialEffects().getDamagePercent()
+                        + getRing2().getSpecialEffects().getDamagePercent()
+                        + getRing3().getSpecialEffects().getDamagePercent()
+                        + getRing4().getSpecialEffects().getDamagePercent()
+                        + getLeftHand1().getSpecialEffects().getDamagePercent()
+                        + getLeftHand2().getSpecialEffects().getDamagePercent()
+                        + getLeftHand3().getSpecialEffects().getDamagePercent()
+                        + getRightHand1().getSpecialEffects().getDamagePercent()
+                        + getRightHand2().getSpecialEffects().getDamagePercent()
+                        + getRightHand3().getSpecialEffects().getDamagePercent();
+            case SpecialEffect.HP_MULTIPLIER:
+                return getHelm().getSpecialEffects().getHpPercent()
+                        * getChest().getSpecialEffects().getHpPercent()
+                        * getGauntlets().getSpecialEffects().getHpPercent()
+                        * getLeggings().getSpecialEffects().getHpPercent()
+                        * getRing1().getSpecialEffects().getHpPercent()
+                        * getRing2().getSpecialEffects().getHpPercent()
+                        * getRing3().getSpecialEffects().getHpPercent()
+                        * getRing4().getSpecialEffects().getHpPercent()
+                        * getLeftHand1().getSpecialEffects().getHpPercent()
+                        * getLeftHand2().getSpecialEffects().getHpPercent()
+                        * getLeftHand3().getSpecialEffects().getHpPercent()
+                        * getRightHand1().getSpecialEffects().getHpPercent()
+                        * getRightHand2().getSpecialEffects().getHpPercent()
+                        * getRightHand3().getSpecialEffects().getHpPercent();
+            case SpecialEffect.STAMINA_MULTIPLIER:
+                return getHelm().getSpecialEffects().getStaminaPercent()
+                        * getChest().getSpecialEffects().getStaminaPercent()
+                        * getGauntlets().getSpecialEffects().getStaminaPercent()
+                        * getLeggings().getSpecialEffects().getStaminaPercent()
+                        * getRing1().getSpecialEffects().getStaminaPercent()
+                        * getRing2().getSpecialEffects().getStaminaPercent()
+                        * getRing3().getSpecialEffects().getStaminaPercent()
+                        * getRing4().getSpecialEffects().getStaminaPercent()
+                        * getLeftHand1().getSpecialEffects().getStaminaPercent()
+                        * getLeftHand2().getSpecialEffects().getStaminaPercent()
+                        * getLeftHand3().getSpecialEffects().getStaminaPercent()
+                        * getRightHand1().getSpecialEffects().getStaminaPercent()
+                        * getRightHand2().getSpecialEffects().getStaminaPercent()
+                        * getRightHand3().getSpecialEffects().getStaminaPercent();
+            case SpecialEffect.EQUIPMENT_LOAD_MULTIPLIER:
+                return getHelm().getSpecialEffects().getEquipLoadPercent()
+                        * getChest().getSpecialEffects().getEquipLoadPercent()
+                        * getGauntlets().getSpecialEffects().getEquipLoadPercent()
+                        * getLeggings().getSpecialEffects().getEquipLoadPercent()
+                        * getRing1().getSpecialEffects().getEquipLoadPercent()
+                        * getRing2().getSpecialEffects().getEquipLoadPercent()
+                        * getRing3().getSpecialEffects().getEquipLoadPercent()
+                        * getRing4().getSpecialEffects().getEquipLoadPercent()
+                        * getLeftHand1().getSpecialEffects().getEquipLoadPercent()
+                        * getLeftHand2().getSpecialEffects().getEquipLoadPercent()
+                        * getLeftHand3().getSpecialEffects().getEquipLoadPercent()
+                        * getRightHand1().getSpecialEffects().getEquipLoadPercent()
+                        * getRightHand2().getSpecialEffects().getEquipLoadPercent()
+                        * getRightHand3().getSpecialEffects().getEquipLoadPercent();
+            case SpecialEffect.PHYSICAL_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getPhysicalAbsorption()
+                        , getChest().getSpecialEffects().getPhysicalAbsorption()
+                        , getGauntlets().getSpecialEffects().getPhysicalAbsorption()
+                        , getLeggings().getSpecialEffects().getPhysicalAbsorption()
+                        , getRing1().getSpecialEffects().getPhysicalAbsorption()
+                        , getRing2().getSpecialEffects().getPhysicalAbsorption()
+                        , getRing3().getSpecialEffects().getPhysicalAbsorption()
+                        , getRing4().getSpecialEffects().getPhysicalAbsorption()
+                        , getLeftHand1().getSpecialEffects().getPhysicalAbsorption()
+                        , getLeftHand2().getSpecialEffects().getPhysicalAbsorption()
+                        , getLeftHand3().getSpecialEffects().getPhysicalAbsorption()
+                        , getRightHand1().getSpecialEffects().getPhysicalAbsorption()
+                        , getRightHand2().getSpecialEffects().getPhysicalAbsorption()
+                        , getRightHand3().getSpecialEffects().getPhysicalAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.STRIKE_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getStrikeAbsorption()
+                        , getChest().getSpecialEffects().getStrikeAbsorption()
+                        , getGauntlets().getSpecialEffects().getStrikeAbsorption()
+                        , getLeggings().getSpecialEffects().getStrikeAbsorption()
+                        , getRing1().getSpecialEffects().getStrikeAbsorption()
+                        , getRing2().getSpecialEffects().getStrikeAbsorption()
+                        , getRing3().getSpecialEffects().getStrikeAbsorption()
+                        , getRing4().getSpecialEffects().getStrikeAbsorption()
+                        , getLeftHand1().getSpecialEffects().getStrikeAbsorption()
+                        , getLeftHand2().getSpecialEffects().getStrikeAbsorption()
+                        , getLeftHand3().getSpecialEffects().getStrikeAbsorption()
+                        , getRightHand1().getSpecialEffects().getStrikeAbsorption()
+                        , getRightHand2().getSpecialEffects().getStrikeAbsorption()
+                        , getRightHand3().getSpecialEffects().getStrikeAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.SLASH_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getSlashAbsorption()
+                        , getChest().getSpecialEffects().getSlashAbsorption()
+                        , getGauntlets().getSpecialEffects().getSlashAbsorption()
+                        , getLeggings().getSpecialEffects().getSlashAbsorption()
+                        , getRing1().getSpecialEffects().getSlashAbsorption()
+                        , getRing2().getSpecialEffects().getSlashAbsorption()
+                        , getRing3().getSpecialEffects().getSlashAbsorption()
+                        , getRing4().getSpecialEffects().getSlashAbsorption()
+                        , getLeftHand1().getSpecialEffects().getSlashAbsorption()
+                        , getLeftHand2().getSpecialEffects().getSlashAbsorption()
+                        , getLeftHand3().getSpecialEffects().getSlashAbsorption()
+                        , getRightHand1().getSpecialEffects().getSlashAbsorption()
+                        , getRightHand2().getSpecialEffects().getSlashAbsorption()
+                        , getRightHand3().getSpecialEffects().getSlashAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.THRUST_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getThrustAbsorption()
+                        , getChest().getSpecialEffects().getThrustAbsorption()
+                        , getGauntlets().getSpecialEffects().getThrustAbsorption()
+                        , getLeggings().getSpecialEffects().getThrustAbsorption()
+                        , getRing1().getSpecialEffects().getThrustAbsorption()
+                        , getRing2().getSpecialEffects().getThrustAbsorption()
+                        , getRing3().getSpecialEffects().getThrustAbsorption()
+                        , getRing4().getSpecialEffects().getThrustAbsorption()
+                        , getLeftHand1().getSpecialEffects().getThrustAbsorption()
+                        , getLeftHand2().getSpecialEffects().getThrustAbsorption()
+                        , getLeftHand3().getSpecialEffects().getThrustAbsorption()
+                        , getRightHand1().getSpecialEffects().getThrustAbsorption()
+                        , getRightHand2().getSpecialEffects().getThrustAbsorption()
+                        , getRightHand3().getSpecialEffects().getThrustAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.MAGIC_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getMagicAbsorption()
+                        , getChest().getSpecialEffects().getMagicAbsorption()
+                        , getGauntlets().getSpecialEffects().getMagicAbsorption()
+                        , getLeggings().getSpecialEffects().getMagicAbsorption()
+                        , getRing1().getSpecialEffects().getMagicAbsorption()
+                        , getRing2().getSpecialEffects().getMagicAbsorption()
+                        , getRing3().getSpecialEffects().getMagicAbsorption()
+                        , getRing4().getSpecialEffects().getMagicAbsorption()
+                        , getLeftHand1().getSpecialEffects().getMagicAbsorption()
+                        , getLeftHand2().getSpecialEffects().getMagicAbsorption()
+                        , getLeftHand3().getSpecialEffects().getMagicAbsorption()
+                        , getRightHand1().getSpecialEffects().getMagicAbsorption()
+                        , getRightHand2().getSpecialEffects().getMagicAbsorption()
+                        , getRightHand3().getSpecialEffects().getMagicAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.FIRE_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getFireAbsorption()
+                        , getChest().getSpecialEffects().getFireAbsorption()
+                        , getGauntlets().getSpecialEffects().getFireAbsorption()
+                        , getLeggings().getSpecialEffects().getFireAbsorption()
+                        , getRing1().getSpecialEffects().getFireAbsorption()
+                        , getRing2().getSpecialEffects().getFireAbsorption()
+                        , getRing3().getSpecialEffects().getFireAbsorption()
+                        , getRing4().getSpecialEffects().getFireAbsorption()
+                        , getLeftHand1().getSpecialEffects().getFireAbsorption()
+                        , getLeftHand2().getSpecialEffects().getFireAbsorption()
+                        , getLeftHand3().getSpecialEffects().getFireAbsorption()
+                        , getRightHand1().getSpecialEffects().getFireAbsorption()
+                        , getRightHand2().getSpecialEffects().getFireAbsorption()
+                        , getRightHand3().getSpecialEffects().getFireAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.LIGHTNING_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getLightningAbsorption()
+                        , getChest().getSpecialEffects().getLightningAbsorption()
+                        , getGauntlets().getSpecialEffects().getLightningAbsorption()
+                        , getLeggings().getSpecialEffects().getLightningAbsorption()
+                        , getRing1().getSpecialEffects().getLightningAbsorption()
+                        , getRing2().getSpecialEffects().getLightningAbsorption()
+                        , getRing3().getSpecialEffects().getLightningAbsorption()
+                        , getRing4().getSpecialEffects().getLightningAbsorption()
+                        , getLeftHand1().getSpecialEffects().getLightningAbsorption()
+                        , getLeftHand2().getSpecialEffects().getLightningAbsorption()
+                        , getLeftHand3().getSpecialEffects().getLightningAbsorption()
+                        , getRightHand1().getSpecialEffects().getLightningAbsorption()
+                        , getRightHand2().getSpecialEffects().getLightningAbsorption()
+                        , getRightHand3().getSpecialEffects().getLightningAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.DARK_ABSORPTION:
+                abs = 1;
+                nums = new double[]{getHelm().getSpecialEffects().getDarkAbsorption()
+                        , getChest().getSpecialEffects().getDarkAbsorption()
+                        , getGauntlets().getSpecialEffects().getDarkAbsorption()
+                        , getLeggings().getSpecialEffects().getDarkAbsorption()
+                        , getRing1().getSpecialEffects().getDarkAbsorption()
+                        , getRing2().getSpecialEffects().getDarkAbsorption()
+                        , getRing3().getSpecialEffects().getDarkAbsorption()
+                        , getRing4().getSpecialEffects().getDarkAbsorption()
+                        , getLeftHand1().getSpecialEffects().getDarkAbsorption()
+                        , getLeftHand2().getSpecialEffects().getDarkAbsorption()
+                        , getLeftHand3().getSpecialEffects().getDarkAbsorption()
+                        , getRightHand1().getSpecialEffects().getDarkAbsorption()
+                        , getRightHand2().getSpecialEffects().getDarkAbsorption()
+                        , getRightHand3().getSpecialEffects().getDarkAbsorption()};
+                for(double num : nums){
+                    abs *= 1-(num/100);
+                }
+                return abs;
+            case SpecialEffect.BLEED_RESISTANCE:
+                return getHelm().getSpecialEffects().getBleedResistance()
+                        * getChest().getSpecialEffects().getBleedResistance()
+                        * getGauntlets().getSpecialEffects().getBleedResistance()
+                        * getLeggings().getSpecialEffects().getBleedResistance()
+                        * getRing1().getSpecialEffects().getBleedResistance()
+                        * getRing2().getSpecialEffects().getBleedResistance()
+                        * getRing3().getSpecialEffects().getBleedResistance()
+                        * getRing4().getSpecialEffects().getBleedResistance()
+                        * getLeftHand1().getSpecialEffects().getBleedResistance()
+                        * getLeftHand2().getSpecialEffects().getBleedResistance()
+                        * getLeftHand3().getSpecialEffects().getBleedResistance()
+                        * getRightHand1().getSpecialEffects().getBleedResistance()
+                        * getRightHand2().getSpecialEffects().getBleedResistance()
+                        * getRightHand3().getSpecialEffects().getBleedResistance();
+            case SpecialEffect.POISON_RESISTANCE:
+                return getHelm().getSpecialEffects().getPoisonResistance()
+                        * getChest().getSpecialEffects().getPoisonResistance()
+                        * getGauntlets().getSpecialEffects().getPoisonResistance()
+                        * getLeggings().getSpecialEffects().getPoisonResistance()
+                        * getRing1().getSpecialEffects().getPoisonResistance()
+                        * getRing2().getSpecialEffects().getPoisonResistance()
+                        * getRing3().getSpecialEffects().getPoisonResistance()
+                        * getRing4().getSpecialEffects().getPoisonResistance()
+                        * getLeftHand1().getSpecialEffects().getPoisonResistance()
+                        * getLeftHand2().getSpecialEffects().getPoisonResistance()
+                        * getLeftHand3().getSpecialEffects().getPoisonResistance()
+                        * getRightHand1().getSpecialEffects().getPoisonResistance()
+                        * getRightHand2().getSpecialEffects().getPoisonResistance()
+                        * getRightHand3().getSpecialEffects().getPoisonResistance();
+            case SpecialEffect.FROST_RESISTANCE:
+                return getHelm().getSpecialEffects().getFrostResistance()
+                        * getChest().getSpecialEffects().getFrostResistance()
+                        * getGauntlets().getSpecialEffects().getFrostResistance()
+                        * getLeggings().getSpecialEffects().getFrostResistance()
+                        * getRing1().getSpecialEffects().getFrostResistance()
+                        * getRing2().getSpecialEffects().getFrostResistance()
+                        * getRing3().getSpecialEffects().getFrostResistance()
+                        * getRing4().getSpecialEffects().getFrostResistance()
+                        * getLeftHand1().getSpecialEffects().getFrostResistance()
+                        * getLeftHand2().getSpecialEffects().getFrostResistance()
+                        * getLeftHand3().getSpecialEffects().getFrostResistance()
+                        * getRightHand1().getSpecialEffects().getFrostResistance()
+                        * getRightHand2().getSpecialEffects().getFrostResistance()
+                        * getRightHand3().getSpecialEffects().getFrostResistance();
+            case SpecialEffect.CURSE_RESISTANCE:
+                return getHelm().getSpecialEffects().getCurseResistance()
+                        * getChest().getSpecialEffects().getCurseResistance()
+                        * getGauntlets().getSpecialEffects().getCurseResistance()
+                        * getLeggings().getSpecialEffects().getCurseResistance()
+                        * getRing1().getSpecialEffects().getCurseResistance()
+                        * getRing2().getSpecialEffects().getCurseResistance()
+                        * getRing3().getSpecialEffects().getCurseResistance()
+                        * getRing4().getSpecialEffects().getCurseResistance()
+                        * getLeftHand1().getSpecialEffects().getCurseResistance()
+                        * getLeftHand2().getSpecialEffects().getCurseResistance()
+                        * getLeftHand3().getSpecialEffects().getCurseResistance()
+                        * getRightHand1().getSpecialEffects().getCurseResistance()
+                        * getRightHand2().getSpecialEffects().getCurseResistance()
+                        * getRightHand3().getSpecialEffects().getCurseResistance();
             default: throw new IllegalArgumentException();
         }
     }

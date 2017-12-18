@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 
 public class CharSelectActivity extends AppCompatActivity {
 
     private ArrayList<Character> chars;
+    ArrayAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +29,47 @@ public class CharSelectActivity extends AppCompatActivity {
 
         ListView lista = (ListView) findViewById(R.id.lvCharacters);
         chars = populateList();
-        ArrayAdapter listAdapter = new CharacterAdapter(this, chars);
+        listAdapter = new CharacterAdapter(this, chars);
         lista.setAdapter(listAdapter);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                callEditChar(i);
+            }
+        });
+    }
 
+    private void callEditChar(int i){
+        Intent intent = new Intent(CharSelectActivity.this, CharEditActivity.class);
+        Bundle bundle = new Bundle();
+        if(i>=0) {
+            bundle.putSerializable("character", chars.get(i));
+        }
+        else{
+            bundle.putSerializable("character", new Character("", 0, Classe.KNIGHT));
+        }
+        bundle.putInt("charIndex", i);
+
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (resultCode == RESULT_OK) {
+            Bundle data = intent.getExtras();
+            Character chara = (Character) data.getSerializable("character");
+            int i = data.getInt("charIndex");
+            if(i >= 0){
+                chars.set(i, chara);
+            }
+            else{
+                chars.add(chara);
+            }
+
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -41,8 +84,7 @@ public class CharSelectActivity extends AppCompatActivity {
 
 
         if (id == R.id.btNew) {
-            Intent intent = new Intent(CharSelectActivity.this, CharEditActivity.class);
-            startActivity(intent);
+            callEditChar(-1);
         }
 
         return super.onOptionsItemSelected(item);

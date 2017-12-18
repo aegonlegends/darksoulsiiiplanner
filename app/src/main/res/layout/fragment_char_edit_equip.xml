@@ -192,6 +192,7 @@
                         android:id="@+id/tvWeaponR1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
                         android:text="Right 1"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
@@ -223,6 +224,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="Left 2"
+                        android:autoSizeTextType="uniform"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
@@ -231,6 +233,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="Right 2"
+                        android:autoSizeTextType="uniform"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
                 </TableRow>
@@ -261,6 +264,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="Left 3"
+                        android:autoSizeTextType="uniform"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
@@ -269,6 +273,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="Right 3"
+                        android:autoSizeTextType="uniform"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
                 </TableRow>

@@ -1,6 +1,8 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-public abstract class Equipment {
+import java.io.Serializable;
+
+public abstract class Equipment implements Serializable {
     protected double weight;
     protected int durability, index;
     protected SpecialEffect specialEffects;

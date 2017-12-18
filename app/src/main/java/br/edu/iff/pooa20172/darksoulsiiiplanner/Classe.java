@@ -1,6 +1,8 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-public class Classe {
+import java.io.Serializable;
+
+public class Classe implements Serializable{
     private int level, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck, index;
 
     public static Classe KNIGHT = new Classe(9, 12, 10, 11, 15, 13, 12, 9, 9, 7, 0);

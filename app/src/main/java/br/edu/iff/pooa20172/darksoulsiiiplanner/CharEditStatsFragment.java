@@ -60,7 +60,7 @@ public class CharEditStatsFragment extends Fragment {
                 c.getClasse().getIndex(),
                 c.getCovenant()};
 
-        int[] bonusStats = new int[] {c.getBonusStat(Character.VIGOR), c.getBonusStat(Character.ATTUNEMENT), c.getBonusStat(Character.ENDURANCE), c.getBonusStat(Character.VITALITY), c.getBonusStat(Character.STRENGTH), c.getBonusStat(Character.DEXTERITY), c.getBonusStat(Character.INTELLIGENCE), c.getBonusStat(Character.FAITH), c.getBonusStat(Character.LUCK)};
+        int[] bonusStats = new int[] {c.getBonusStat(SpecialEffect.VIGOR), c.getBonusStat(SpecialEffect.ATTUNEMENT), c.getBonusStat(SpecialEffect.ENDURANCE), c.getBonusStat(SpecialEffect.VITALITY), c.getBonusStat(SpecialEffect.STRENGTH), c.getBonusStat(SpecialEffect.DEXTERITY), c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getBonusStat(SpecialEffect.FAITH), c.getBonusStat(SpecialEffect.LUCK)};
 
         updatingViews = true;
         for (int i = 0; i < editTextIds.length; i++){
@@ -120,9 +120,10 @@ public class CharEditStatsFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser == false || getView() == null){
-            return;
+        if(getView() == null){
+           return;
         }
+        fListener.clearFocus();
         updateData();
     }
     private class FocusChangedListener implements View.OnFocusChangeListener {

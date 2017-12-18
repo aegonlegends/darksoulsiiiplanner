@@ -102,21 +102,7 @@ public class CharEditEquipFragment extends Fragment {
                 + c.getRightHand3().getWeight() + c.getLeftHand3().getWeight()
                 + c.getRing1().getWeight() + c.getRing2().getWeight() + c.getRing3().getWeight() + c.getRing4().getWeight();
 
-        int bonusVit = c.getBonusStat(Character.VITALITY);
-        double bonusEquipLoad = c.getHelm().getSpecialEffects().getEquipLoadPercent()
-                * c.getChest().getSpecialEffects().getEquipLoadPercent()
-                * c.getGauntlets().getSpecialEffects().getEquipLoadPercent()
-                * c.getLeggings().getSpecialEffects().getEquipLoadPercent()
-                * c.getRing1().getSpecialEffects().getEquipLoadPercent()
-                * c.getRing2().getSpecialEffects().getEquipLoadPercent()
-                * c.getRing3().getSpecialEffects().getEquipLoadPercent()
-                * c.getRing4().getSpecialEffects().getEquipLoadPercent()
-                * c.getLeftHand1().getSpecialEffects().getEquipLoadPercent()
-                * c.getLeftHand2().getSpecialEffects().getEquipLoadPercent()
-                * c.getLeftHand3().getSpecialEffects().getEquipLoadPercent()
-                * c.getRightHand1().getSpecialEffects().getEquipLoadPercent()
-                * c.getRightHand2().getSpecialEffects().getEquipLoadPercent()
-                * c.getRightHand3().getSpecialEffects().getEquipLoadPercent();
+        double bonusEquipLoad = c.getBonusMultipliers(SpecialEffect.EQUIPMENT_LOAD_MULTIPLIER);
 
         label.setText(String.format(Locale.US,"%.1f/%.1f", weight, c.calculateEquipLoad() * bonusEquipLoad));
 
@@ -160,10 +146,10 @@ public class CharEditEquipFragment extends Fragment {
                 continue;
             }
 
-            if(wp.getStrengthRequirement() > c.getStrength() + c.getBonusStat(Character.STRENGTH) ||
-                    wp.getDexterityRequirement() > c.getDexterity() + c.getBonusStat(Character.DEXTERITY) ||
-                    wp.getIntelligenceRequirement() > c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE) ||
-                    wp.getFaithRequirement() > c.getFaith() + c.getBonusStat(Character.FAITH)){
+            if(wp.getStrengthRequirement() > c.getStrength() + c.getBonusStat(SpecialEffect.STRENGTH) ||
+                    wp.getDexterityRequirement() > c.getDexterity() + c.getBonusStat(SpecialEffect.DEXTERITY) ||
+                    wp.getIntelligenceRequirement() > c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE) ||
+                    wp.getFaithRequirement() > c.getFaith() + c.getBonusStat(SpecialEffect.FAITH)){
                 label.setText(Html.fromHtml(String.format("%s <font color='red'> %d/%d/%d/%d</font>", label.getText().toString(), wp.getStrengthRequirement(),wp.getDexterityRequirement(),wp.getIntelligenceRequirement(),wp.getFaithRequirement())));
                 continue;
             }
@@ -177,13 +163,13 @@ public class CharEditEquipFragment extends Fragment {
                         label.getText().toString(), wp.getStability(), wp.getPhysicalBlock(), wp.getMagicBlock(), wp.getFireBlock(), wp.getLightningBlock(), wp.getDarkBlock() )));
             }
             else{
-                double phys = wp.getPhysicalBaseAttack() + wp.calculateBonusPhysicalAttack(c.getStrength() + c.getBonusStat(Character.STRENGTH), c.getDexterity() + c.getBonusStat(Character.DEXTERITY), c.getFaith() + c.getBonusStat(Character.FAITH), c.getLuck() + c.getBonusStat(Character.LUCK));
-                double magic = wp.getMagicBaseAttack() + wp.calculateBonusMagicAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
-                double fire = wp.getFireBaseAttack() + wp.calculateBonusFireAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
-                double lightning = wp.getLightningBaseAttack() + wp.calculateBonusLightningAttack(c.getFaith() + c.getBonusStat(Character.FAITH));
-                double dark = wp.getDarkBaseAttack() + wp.calculateBonusDarkAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
+                double phys = wp.getPhysicalBaseAttack() + wp.calculateBonusPhysicalAttack(c.getStrength() + c.getBonusStat(SpecialEffect.STRENGTH), c.getDexterity() + c.getBonusStat(SpecialEffect.DEXTERITY), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH), c.getLuck() + c.getBonusStat(SpecialEffect.LUCK));
+                double magic = wp.getMagicBaseAttack() + wp.calculateBonusMagicAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double fire = wp.getFireBaseAttack() + wp.calculateBonusFireAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double lightning = wp.getLightningBaseAttack() + wp.calculateBonusLightningAttack(c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double dark = wp.getDarkBaseAttack() + wp.calculateBonusDarkAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
 
-                label.setText(Html.fromHtml(String.format(Locale.US,"%s (%.0f %.1f/<font color='#00CED1'>%.1f</font>/<font color='#FFA500'>%.1f</font>/<font color='yellow'>%.1f</font>/<font color='#8A2BE2'>%.1f</font>/<font color='red'>%d</font>/<font color='fuchsia'>%d</font>/<font color='aqua'>%d</font>)",
+                label.setText(Html.fromHtml(String.format(Locale.US,"%s (%.1f %.1f/<font color='#00CED1'>%.1f</font>/<font color='#FFA500'>%.1f</font>/<font color='yellow'>%.1f</font>/<font color='#8A2BE2'>%.1f</font>/<font color='red'>%d</font>/<font color='fuchsia'>%d</font>/<font color='aqua'>%d</font>)",
                         label.getText().toString(), phys+magic+fire+lightning+dark, phys, magic, fire, lightning, dark, wp.getBleedBuildup(), wp.getPoisonBuildup(), wp.getFrostBuildup() ) ));
             }
         }
@@ -246,10 +232,8 @@ public class CharEditEquipFragment extends Fragment {
         if(isVisibleToUser == false || getView() == null){
             return;
         }
-        fListener.clearFocus();
         updateData();
     }
-
     private class ItemSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -320,10 +304,10 @@ public class CharEditEquipFragment extends Fragment {
                 return;
             }
 
-            if(wp.getStrengthRequirement() > c.getStrength() + c.getBonusStat(Character.STRENGTH) ||
-                    wp.getDexterityRequirement() > c.getDexterity() + c.getBonusStat(Character.DEXTERITY) ||
-                    wp.getIntelligenceRequirement() > c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE) ||
-                    wp.getFaithRequirement() > c.getFaith() + c.getBonusStat(Character.FAITH)){
+            if(wp.getStrengthRequirement() > c.getStrength() + c.getBonusStat(SpecialEffect.STRENGTH) ||
+                    wp.getDexterityRequirement() > c.getDexterity() + c.getBonusStat(SpecialEffect.DEXTERITY) ||
+                    wp.getIntelligenceRequirement() > c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE) ||
+                    wp.getFaithRequirement() > c.getFaith() + c.getBonusStat(SpecialEffect.FAITH)){
                 Toast.makeText(getContext(),
                         String.format("Minimum Stats: %d Strength / %d Dexterity / %d Intelligence / %d Faith",
                                 wp.getStrengthRequirement(),wp.getDexterityRequirement(),wp.getIntelligenceRequirement(),wp.getFaithRequirement()),
@@ -338,14 +322,14 @@ public class CharEditEquipFragment extends Fragment {
                         Toast.LENGTH_LONG).show();
             }
             else{
-                double phys = wp.getPhysicalBaseAttack() + wp.calculateBonusPhysicalAttack(c.getStrength() + c.getBonusStat(Character.STRENGTH), c.getDexterity() + c.getBonusStat(Character.DEXTERITY), c.getFaith() + c.getBonusStat(Character.FAITH), c.getLuck() + c.getBonusStat(Character.LUCK));
-                double magic = wp.getMagicBaseAttack() + wp.calculateBonusMagicAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
-                double fire = wp.getFireBaseAttack() + wp.calculateBonusFireAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
-                double lightning = wp.getLightningBaseAttack() + wp.calculateBonusLightningAttack(c.getFaith() + c.getBonusStat(Character.FAITH));
-                double dark = wp.getDarkBaseAttack() + wp.calculateBonusDarkAttack(c.getIntelligence() + c.getBonusStat(Character.INTELLIGENCE), c.getFaith() + c.getBonusStat(Character.FAITH));
+                double phys = wp.getPhysicalBaseAttack() + wp.calculateBonusPhysicalAttack(c.getStrength() + c.getBonusStat(SpecialEffect.STRENGTH), c.getDexterity() + c.getBonusStat(SpecialEffect.DEXTERITY), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH), c.getLuck() + c.getBonusStat(SpecialEffect.LUCK));
+                double magic = wp.getMagicBaseAttack() + wp.calculateBonusMagicAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double fire = wp.getFireBaseAttack() + wp.calculateBonusFireAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double lightning = wp.getLightningBaseAttack() + wp.calculateBonusLightningAttack(c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
+                double dark = wp.getDarkBaseAttack() + wp.calculateBonusDarkAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
 
                 Toast.makeText(getContext(),
-                        String.format(Locale.US,"Attack: %.0f (Physical: %.1f / Magic: %.1f / Fire: %.1f / Lightning: %.1f / Dark: %.1f) - Bleed: %d / Poison %d / Frost %d",
+                        String.format(Locale.US,"Attack: %.1f (Physical: %.1f / Magic: %.1f / Fire: %.1f / Lightning: %.1f / Dark: %.1f) - Bleed: %d / Poison %d / Frost %d",
                                 phys+magic+fire+lightning+dark, phys, magic, fire, lightning, dark, wp.getBleedBuildup(), wp.getPoisonBuildup(), wp.getFrostBuildup() ),
                         Toast.LENGTH_LONG).show();
             }

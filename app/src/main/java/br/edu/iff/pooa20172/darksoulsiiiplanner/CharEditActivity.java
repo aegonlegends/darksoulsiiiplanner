@@ -1,5 +1,7 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,8 +9,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -16,7 +20,7 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
     private ViewPager pager;
     private PagerAdapter pagerAdapter;
     private Character character;
-    private boolean saveEdits = false;
+    int charIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,14 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
         tabLayout.setupWithViewPager(pager);
 
         if (savedInstanceState == null) {
-            character = new Character("Arty", 2, Classe.PYROMANCER);
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            character = (Character) bundle.getSerializable("character");
+            charIndex = bundle.getInt("charIndex");
         }
         else{
             character = (Character) savedInstanceState.getSerializable("character");
+            charIndex = savedInstanceState.getInt("charIndex");
         }
 
     }
@@ -42,7 +50,50 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
     @Override
     protected void onSaveInstanceState (Bundle outState){
         outState.putSerializable("character", character);
+        outState.putInt("charIndex", charIndex);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        clearFocus();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Exit Editor");
+        builder.setMessage("Do you wish to save your changes?");
+        builder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        Intent intent = new Intent();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("character", character);
+                        bundle.putInt("charIndex", charIndex);
+
+                        intent.putExtras(bundle);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                });
+        builder.setNegativeButton("No",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        finish();
+                    }
+                });
+        builder.setNeutralButton("Cancel",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        dialog.cancel();
+                    }
+                });
+
+        builder.create().show();
     }
 
     public Character getCharacter(){
@@ -135,9 +186,13 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
     }
 
     public void clearFocus(){
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        findViewById(R.id.pager).requestFocus();
+        try{
+            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            findViewById(R.id.pager).requestFocus();
+        }
+        catch (NullPointerException e){
+        }
     }
 
     private class CharEditPagerAdapter extends FragmentStatePagerAdapter {

@@ -1,9 +1,15 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-public class SpecialEffect {
-    private int index, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck, attunementSlot;
-    private double damage, damagePercent, hpPercent, staminaPercent, equipLoadPercent, physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption,fireAbsorption,lightningAbsorption,darkAbsorption, bleedResistance, poisonResistance, frostResistance, curseResistance;
+import java.io.Serializable;
+
+public class SpecialEffect implements Serializable {
+    private int index, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck, attunementSlot, poise, itemDiscovery;
+    private double damage, damagePercent, hpPercent, staminaPercent, equipLoadPercent,
+        physicalAbsorption, strikeAbsorption, slashAbsorption, thrustAbsorption, magicAbsorption, fireAbsorption, lightningAbsorption, darkAbsorption, bleedResistance, poisonResistance, frostResistance, curseResistance;
     private String description;
+
+    public static final int VIGOR=0, ATTUNEMENT=1, ENDURANCE=2, VITALITY=3, STRENGTH=4, DEXTERITY=5, INTELLIGENCE=6, FAITH=7, LUCK=8, ATTUNEMENT_SLOTS =9, POISE=10, ITEM_DISCOVERY=11;
+    public static final int DAMAGE_MULTIPLIER=0, HP_MULTIPLIER=1, STAMINA_MULTIPLIER=2, EQUIPMENT_LOAD_MULTIPLIER=3, PHYSICAL_ABSORPTION=4, STRIKE_ABSORPTION=5, SLASH_ABSORPTION=6, THRUST_ABSORPTION=7, MAGIC_ABSORPTION=8, FIRE_ABSORPTION=9, LIGHTNING_ABSORPTION=10, DARK_ABSORPTION=11, BLEED_RESISTANCE=12, POISON_RESISTANCE=13, FROST_RESISTANCE=14, CURSE_RESISTANCE=15;
 
     public SpecialEffect(int index) {
         this.index = index;
@@ -16,6 +22,8 @@ public class SpecialEffect {
         this.intelligence = 0;
         this.faith = 0;
         this.luck = 0;
+        this.poise = 0;
+        this.itemDiscovery=0;
         this.attunementSlot = 0;
         this.damage = 0;
         this.damagePercent = 1;
@@ -270,5 +278,21 @@ public class SpecialEffect {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getPoise() {
+        return poise;
+    }
+
+    public void setPoise(int poise) {
+        this.poise = poise;
+    }
+
+    public int getItemDiscovery() {
+        return itemDiscovery;
+    }
+
+    public void setItemDiscovery(int itemDiscovery) {
+        this.itemDiscovery = itemDiscovery;
     }
 }
