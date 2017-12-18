@@ -159,8 +159,8 @@ public class CharEditEquipFragment extends Fragment {
             }
 
             if(i%2 == 0){ // Left Hand, shield stats
-                label.setText(Html.fromHtml(String.format(Locale.US,"%s (%d %.1f/<font color='#00CED1'>%.1f</font>/<font color='#FFA500'>%.1f</font>/<font color='yellow'>%.1f</font>/<font color='#8A2BE2'>%.1f</font>)",
-                        label.getText().toString(), wp.getStability(), wp.getPhysicalBlock(), wp.getMagicBlock(), wp.getFireBlock(), wp.getLightningBlock(), wp.getDarkBlock() )));
+                label.setText(Html.fromHtml(String.format(Locale.US,"%s (Stability: %d)",
+                        label.getText().toString(), wp.getStability())));
             }
             else{
                 double phys = wp.getPhysicalBaseAttack() + wp.calculateBonusPhysicalAttack(c.getStrength() + c.getBonusStat(SpecialEffect.STRENGTH), c.getDexterity() + c.getBonusStat(SpecialEffect.DEXTERITY), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH), c.getLuck() + c.getBonusStat(SpecialEffect.LUCK));
@@ -169,8 +169,8 @@ public class CharEditEquipFragment extends Fragment {
                 double lightning = wp.getLightningBaseAttack() + wp.calculateBonusLightningAttack(c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
                 double dark = wp.getDarkBaseAttack() + wp.calculateBonusDarkAttack(c.getIntelligence() + c.getBonusStat(SpecialEffect.INTELLIGENCE), c.getFaith() + c.getBonusStat(SpecialEffect.FAITH));
 
-                label.setText(Html.fromHtml(String.format(Locale.US,"%s (%.1f %.1f/<font color='#00CED1'>%.1f</font>/<font color='#FFA500'>%.1f</font>/<font color='yellow'>%.1f</font>/<font color='#8A2BE2'>%.1f</font>/<font color='red'>%d</font>/<font color='fuchsia'>%d</font>/<font color='aqua'>%d</font>)",
-                        label.getText().toString(), phys+magic+fire+lightning+dark, phys, magic, fire, lightning, dark, wp.getBleedBuildup(), wp.getPoisonBuildup(), wp.getFrostBuildup() ) ));
+                label.setText(Html.fromHtml(String.format(Locale.US,"%s (AR: %.1f)",
+                        label.getText().toString(), phys+magic+fire+lightning+dark ) ));
             }
         }
 

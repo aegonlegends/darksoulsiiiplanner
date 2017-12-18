@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Level xxx"
-            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Line2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Line2"
+            android:textColor="?android:attr/colorForeground" />
 
         <TextView
             android:id="@+id/covenant"
@@ -30,7 +31,8 @@
             android:layout_weight="1"
             android:text="Covenant"
             android:textAlignment="textEnd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Line2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Line2"
+            android:textColor="?android:attr/colorForeground" />
     </LinearLayout>
 
 

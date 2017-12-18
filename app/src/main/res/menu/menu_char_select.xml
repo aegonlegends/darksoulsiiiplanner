@@ -5,7 +5,7 @@
     <item
         android:id="@+id/btNew"
         android:enabled="true"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/ic_input_add"
         android:title="New"
         app:showAsAction="always" />
 </menu>
