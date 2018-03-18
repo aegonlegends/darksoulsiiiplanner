@@ -12,12 +12,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
+
+import io.realm.Realm;
 
 public class CharEditActivity extends AppCompatActivity implements CharEditFragmentListener {
     private ViewPager pager;
+    private Realm realm;
     private PagerAdapter pagerAdapter;
     private Character character;
     int charIndex;
@@ -26,6 +27,8 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_char_edit);
+
+        realm = Realm.getDefaultInstance();
 
         pager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new CharEditPagerAdapter(getSupportFragmentManager());
@@ -71,6 +74,8 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
                         bundle.putSerializable("character", character);
                         bundle.putInt("charIndex", charIndex);
 
+                        salvarDB();
+
                         intent.putExtras(bundle);
                         setResult(RESULT_OK, intent);
                         finish();
@@ -94,6 +99,33 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
                 });
 
         builder.create().show();
+    }
+
+    private void salvarDB(){
+        if(character.getId() != -1){
+            editarDB();
+            return;
+        }
+
+        int proximoID = 1;
+        if(realm.where(CharacterDB.class).max("id") !=null)
+            proximoID = realm.where(CharacterDB.class).max("id").intValue()+1;
+
+        character.setId(proximoID);
+        realm.beginTransaction();
+
+        CharacterDB chara = new CharacterDB(character);
+
+        realm.copyToRealm(chara);
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    private void editarDB(){
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(new CharacterDB(character));
+        realm.commitTransaction();
+        realm.close();
     }
 
     public Character getCharacter(){
@@ -147,33 +179,33 @@ public class CharEditActivity extends AppCompatActivity implements CharEditFragm
                 break;
             case "sCovenant": character.setCovenant(index);
                 break;
-            case "sWeaponL1": character.setLeftHand1(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponL1": character.setLeftHand1(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sWeaponL2": character.setLeftHand2(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponL2": character.setLeftHand2(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sWeaponL3": character.setLeftHand3(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponL3": character.setLeftHand3(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sWeaponR1": character.setRightHand1(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponR1": character.setRightHand1(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sWeaponR2": character.setRightHand2(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponR2": character.setRightHand2(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sWeaponR3": character.setRightHand3(Database.getWeapon(index, Weapon.REGULAR));
+            case "sWeaponR3": character.setRightHand3(EquipmentData.getWeapon(index, Weapon.REGULAR));
                 break;
-            case "sHelm" :  character.setHelm(Database.getArmor(index, Armor.TYPE_HELM));
+            case "sHelm" :  character.setHelm(EquipmentData.getArmor(index, Armor.TYPE_HELM));
                 break;
-            case "sChest" :  character.setChest(Database.getArmor(index, Armor.TYPE_CHESTPIECE));
+            case "sChest" :  character.setChest(EquipmentData.getArmor(index, Armor.TYPE_CHESTPIECE));
                 break;
-            case "sGauntlets" :  character.setGauntlets(Database.getArmor(index, Armor.TYPE_GAUNTLETS));
+            case "sGauntlets" :  character.setGauntlets(EquipmentData.getArmor(index, Armor.TYPE_GAUNTLETS));
                 break;
-            case "sLeggings" :  character.setLeggings(Database.getArmor(index, Armor.TYPE_LEGGINGS));
+            case "sLeggings" :  character.setLeggings(EquipmentData.getArmor(index, Armor.TYPE_LEGGINGS));
                 break;
-            case "sRing1" :  character.setRing1(Database.getRing(index));
+            case "sRing1" :  character.setRing1(EquipmentData.getRing(index));
                 break;
-            case "sRing2" :  character.setRing2(Database.getRing(index));
+            case "sRing2" :  character.setRing2(EquipmentData.getRing(index));
                 break;
-            case "sRing3" :  character.setRing3(Database.getRing(index));
+            case "sRing3" :  character.setRing3(EquipmentData.getRing(index));
                 break;
-            case "sRing4" :  character.setRing4(Database.getRing(index));
+            case "sRing4" :  character.setRing4(EquipmentData.getRing(index));
                 break;
         }
     }

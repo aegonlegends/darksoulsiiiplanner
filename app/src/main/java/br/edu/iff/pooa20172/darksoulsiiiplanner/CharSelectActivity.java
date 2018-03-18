@@ -1,7 +1,9 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,10 +17,14 @@ import android.widget.Toast;
 
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
 
 public class CharSelectActivity extends AppCompatActivity {
 
     private ArrayList<Character> chars;
+    private Realm realm;
     ArrayAdapter listAdapter;
 
     @Override
@@ -28,6 +34,8 @@ public class CharSelectActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.CStoolbar);
         this.setSupportActionBar(toolbar);
 
+        realm = Realm.getDefaultInstance();
+
         ListView lista = (ListView) findViewById(R.id.lvCharacters);
         chars = populateList();
         listAdapter = new CharacterAdapter(this, chars);
@@ -36,6 +44,37 @@ public class CharSelectActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 callEditChar(i);
+            }
+        });
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CharSelectActivity.this);
+                builder.setTitle("Delete Character");
+                builder.setMessage("Do you wish to delete the character \"" + chars.get(position).getName() +"\"?");
+                builder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                                CharacterDB chara = realm.where(CharacterDB.class).equalTo("id", chars.get(position).getId()).findFirst();
+                                realm.beginTransaction();
+                                chara.deleteFromRealm();
+                                realm.commitTransaction();
+                                chars.remove(position);
+                                listAdapter.notifyDataSetChanged();
+                            }
+                        });
+                builder.setNegativeButton("No",
+                        new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                            }
+                        });
+
+                builder.create().show();
+                return true;
             }
         });
     }
@@ -93,10 +132,12 @@ public class CharSelectActivity extends AppCompatActivity {
 
     private ArrayList<Character> populateList() {
         chars = new ArrayList<Character>();
-        chars.add(new Character("Aegon Dalenthar", 2, Classe.KNIGHT));
-        chars.add(new Character("Izabella Dalenthar", 0, Classe.MERCENARY));
-        chars.add(new Character("Cecile Erathell", 5, Classe.CLERIC));
-        chars.add(new Character("Claire Erathell", 6, Classe.SORCERER));
+        List<CharacterDB> charsdb;
+        charsdb = (List)realm.where(CharacterDB.class).findAll();
+        for(CharacterDB chardb : charsdb){
+            chars.add(new Character((chardb)));
+        }
+
         return chars;
     }
 }

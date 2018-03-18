@@ -30,6 +30,22 @@ public class Classe implements Serializable{
         this.index = index;
     }
 
+    static public Classe fromIndex(int index){
+        switch (index){
+            case 0: return KNIGHT;
+            case 1: return MERCENARY;
+            case 2: return WARRIOR;
+            case 3: return HERALD;
+            case 4: return THIEF;
+            case 5: return ASSASSIN;
+            case 6: return SORCERER;
+            case 7: return PYROMANCER;
+            case 8: return CLERIC;
+            case 9: return DEPRIVED;
+            default: return null;
+        }
+    }
+
     public int getLevel() {
         return level;
     }

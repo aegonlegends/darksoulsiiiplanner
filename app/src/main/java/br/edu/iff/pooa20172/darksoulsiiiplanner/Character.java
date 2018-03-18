@@ -3,6 +3,8 @@ package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
 import java.io.Serializable;
 
+import io.realm.RealmList;
+
 import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ATTUNEMENT;
 import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.DEXTERITY;
 import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ENDURANCE;
@@ -14,6 +16,7 @@ import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VIGOR;
 import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VITALITY;
 
 public class Character implements Serializable {
+    private int id = -1;
     private String name;
     private Classe classe;
     private int covenant, vigor, attunement, endurance, vitality, strength, dexterity, intelligence, faith, luck;
@@ -77,24 +80,61 @@ public class Character implements Serializable {
         this.spells = spells;
     }
 
+    public Character(CharacterDB chara){
+        this.id = chara.getId();
+        this.name = chara.getName();
+        this.classe = Classe.fromIndex(chara.getClasse());
+        this.covenant = chara.getCovenant();
+        this.vigor = chara.getVigor();
+        this.attunement = chara.getAttunement();
+        this.endurance = chara.getEndurance();
+        this.vitality = chara.getVitality();
+        this.strength = chara.getStrength();
+        this.dexterity = chara.getDexterity();
+        this.intelligence = chara.getIntelligence();
+        this.faith = chara.getFaith();
+        this.luck = chara.getLuck();
+        this.leftHand1 = EquipmentData.getWeapon(chara.getLeftHand1(), Weapon.REGULAR);
+        this.leftHand2 = EquipmentData.getWeapon(chara.getLeftHand2(), Weapon.REGULAR);
+        this.leftHand3 = EquipmentData.getWeapon(chara.getLeftHand3(), Weapon.REGULAR);
+        this.rightHand1 = EquipmentData.getWeapon(chara.getRightHand1(), Weapon.REGULAR);
+        this.rightHand2 = EquipmentData.getWeapon(chara.getRightHand2(), Weapon.REGULAR);
+        this.rightHand3 = EquipmentData.getWeapon(chara.getRightHand3(), Weapon.REGULAR);
+        this.helm = EquipmentData.getArmor(chara.getHelm(), Armor.TYPE_HELM);
+        this.chest = EquipmentData.getArmor(chara.getChest(), Armor.TYPE_CHESTPIECE);
+        this.gauntlets = EquipmentData.getArmor(chara.getGauntlets(), Armor.TYPE_GAUNTLETS);
+        this.leggings = EquipmentData.getArmor(chara.getLeggings(), Armor.TYPE_LEGGINGS);
+        this.ring1 = EquipmentData.getRing(chara.getRing1());
+        this.ring2 = EquipmentData.getRing(chara.getRing2());
+        this.ring3 = EquipmentData.getRing(chara.getRing3());
+        this.ring4 = EquipmentData.getRing(chara.getRing4());
+        this.twoHanded = chara.isTwoHanded();
+        this.spells = new int[chara.getSpells().size()];
+        Integer[] getspells = chara.getSpells().toArray(new Integer[chara.getSpells().size()]);
+
+        for(int i=0; i < getspells.length; i++){
+            spells[i] = getspells[i];
+        }
+    }
+
     private void setDefaultEquip(){
-        setLeftHand1(Database.getWeapon(0, Weapon.REGULAR));
-        setLeftHand2(Database.getWeapon(0, Weapon.REGULAR));
-        setLeftHand3(Database.getWeapon(0, Weapon.REGULAR));
+        setLeftHand1(EquipmentData.getWeapon(0, Weapon.REGULAR));
+        setLeftHand2(EquipmentData.getWeapon(0, Weapon.REGULAR));
+        setLeftHand3(EquipmentData.getWeapon(0, Weapon.REGULAR));
 
-        setRightHand1(Database.getWeapon(0, Weapon.REGULAR));
-        setRightHand2(Database.getWeapon(0, Weapon.REGULAR));
-        setRightHand3(Database.getWeapon(0, Weapon.REGULAR));
+        setRightHand1(EquipmentData.getWeapon(0, Weapon.REGULAR));
+        setRightHand2(EquipmentData.getWeapon(0, Weapon.REGULAR));
+        setRightHand3(EquipmentData.getWeapon(0, Weapon.REGULAR));
 
-        setHelm(Database.getArmor(0, Armor.TYPE_HELM));
-        setChest(Database.getArmor(0, Armor.TYPE_CHESTPIECE));
-        setGauntlets(Database.getArmor(0, Armor.TYPE_GAUNTLETS));
-        setLeggings(Database.getArmor(0, Armor.TYPE_LEGGINGS));
+        setHelm(EquipmentData.getArmor(0, Armor.TYPE_HELM));
+        setChest(EquipmentData.getArmor(0, Armor.TYPE_CHESTPIECE));
+        setGauntlets(EquipmentData.getArmor(0, Armor.TYPE_GAUNTLETS));
+        setLeggings(EquipmentData.getArmor(0, Armor.TYPE_LEGGINGS));
 
-        setRing1(Database.getRing(0));
-        setRing2(Database.getRing(0));
-        setRing3(Database.getRing(0));
-        setRing4(Database.getRing(0));
+        setRing1(EquipmentData.getRing(0));
+        setRing2(EquipmentData.getRing(0));
+        setRing3(EquipmentData.getRing(0));
+        setRing4(EquipmentData.getRing(0));
     }
 
     int calculateHP(){
@@ -1054,5 +1094,13 @@ public class Character implements Serializable {
 
     public void setSpells(int[] spells) {
         this.spells = spells;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

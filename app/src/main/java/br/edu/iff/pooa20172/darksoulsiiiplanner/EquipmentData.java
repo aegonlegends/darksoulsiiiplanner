@@ -1,9 +1,9 @@
 package br.edu.iff.pooa20172.darksoulsiiiplanner;
 
-public class Database {
+public class EquipmentData {
     static boolean connected = false;
 
-    private Database(){
+    private EquipmentData(){
         //no instance
     }
 
