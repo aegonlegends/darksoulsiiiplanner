@@ -1,4 +1,4 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments.CharEditEquipFragment;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments.CharEditFragmentListener;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments.CharEditOverviewFragment;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments.CharEditStatsFragment;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Armor;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Persistence.CharacterDB;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.EquipmentData;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.R;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Weapon;
 import io.realm.Realm;
 
 public class CharEditActivity extends AppCompatActivity implements CharEditFragmentListener {

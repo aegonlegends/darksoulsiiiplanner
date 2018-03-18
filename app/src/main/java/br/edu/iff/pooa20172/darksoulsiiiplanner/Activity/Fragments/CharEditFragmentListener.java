@@ -1,4 +1,6 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments;
+
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
 
 public interface CharEditFragmentListener {
     public void onEditTextChanged(String idName, String value);

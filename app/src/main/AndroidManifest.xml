@@ -3,14 +3,14 @@
     package="br.edu.iff.pooa20172.darksoulsiiiplanner">
 
     <application
-        android:name = ".BDConfig"
+        android:name = ".Adapter.BDConfig"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/DarkSoulsTheme">
-        <activity android:name=".CharSelectActivity"
+        <activity android:name=".Activity.CharSelectActivity"
             android:theme="@style/DarkSoulsTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CharEditActivity"></activity>
+        <activity android:name=".Activity.CharEditActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Persistence;
 
 import java.io.Serializable;
 
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

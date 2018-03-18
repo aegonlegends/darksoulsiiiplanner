@@ -1,17 +1,18 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Locale;
+
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.R;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.SpecialEffect;
 
 public class CharEditOverviewFragment extends Fragment {
 

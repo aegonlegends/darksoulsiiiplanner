@@ -1,4 +1,4 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.R;
 
 public class CharacterAdapter extends ArrayAdapter<Character> {
     private final Context context;

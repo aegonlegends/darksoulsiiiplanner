@@ -1,7 +1,6 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -11,14 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Locale;
+
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.R;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.SpecialEffect;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Weapon;
 
 public class CharEditEquipFragment extends Fragment {
 

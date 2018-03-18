@@ -1,4 +1,4 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Model;
 
 public class Weapon extends Equipment {
     private boolean blessed, hollow, catalyst, infusable;

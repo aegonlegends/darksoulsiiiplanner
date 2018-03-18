@@ -1,4 +1,4 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Model;
 
 public class EquipmentData {
     static boolean connected = false;

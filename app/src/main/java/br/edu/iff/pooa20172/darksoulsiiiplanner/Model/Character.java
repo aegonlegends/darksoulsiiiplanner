@@ -1,19 +1,9 @@
 
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Model;
 
 import java.io.Serializable;
 
-import io.realm.RealmList;
-
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ATTUNEMENT;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.DEXTERITY;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.ENDURANCE;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.FAITH;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.INTELLIGENCE;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.LUCK;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.STRENGTH;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VIGOR;
-import static br.edu.iff.pooa20172.darksoulsiiiplanner.SpecialEffect.VITALITY;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Persistence.CharacterDB;
 
 public class Character implements Serializable {
     private int id = -1;
@@ -137,19 +127,19 @@ public class Character implements Serializable {
         setRing4(EquipmentData.getRing(0));
     }
 
-    int calculateHP(){
-        int vigor = this.vigor + getBonusStat(VIGOR);
+    public int calculateHP(){
+        int vigor = this.vigor + getBonusStat(SpecialEffect.VIGOR);
         if(vigor>99){ vigor = 99;}
 
         return hpValues[vigor-1];
     }
 
-    int calculateFP(){
+    public int calculateFP(){
         return fpValues[attunement-1];
     }
 
-    int calculateStamina(){
-        int endurance = this.endurance + getBonusStat(ENDURANCE);
+    public int calculateStamina(){
+        int endurance = this.endurance + getBonusStat(SpecialEffect.ENDURANCE);
         if(endurance>99){ endurance = 99;}
 
         if(endurance > 40){
@@ -158,22 +148,22 @@ public class Character implements Serializable {
         return staminaValues[endurance];
     }
 
-    double calculateEquipLoad(){
-        int vitality = this.vitality + getBonusStat(VITALITY);
+    public double calculateEquipLoad(){
+        int vitality = this.vitality + getBonusStat(SpecialEffect.VITALITY);
         if(vitality>99){ vitality= 99;}
 
         return 40 + vitality;
     }
 
-    int calculateItemDisc(){
-        int luck = this.luck + getBonusStat(LUCK);
+    public int calculateItemDisc(){
+        int luck = this.luck + getBonusStat(SpecialEffect.LUCK);
         if(luck>99){ luck= 99;}
 
         return 100 + luck;
     }
 
-    int calculateAttSlots(){
-        int attunement = this.attunement + getBonusStat(ATTUNEMENT);
+    public int calculateAttSlots(){
+        int attunement = this.attunement + getBonusStat(SpecialEffect.ATTUNEMENT);
         if(attunement>99){ attunement= 99;}
 
         for(int i=attSlotsBreakpoints.length-1; i>=0; i--){
@@ -185,136 +175,136 @@ public class Character implements Serializable {
         return 0;
     }
 
-    int calculatePhysicalDefenses(){
+    public int calculatePhysicalDefenses(){
         double def = 0;
-        def += (vigor + getBonusStat(VIGOR)) * 0.4;
-        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
-        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
-        def += (vitality + getBonusStat(VITALITY)) * 1.5;
-        def += (strength + getBonusStat(STRENGTH)) * 0.73;
-        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
-        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
-        def += (faith + getBonusStat(FAITH)) * 0.4;
-        def += (luck + getBonusStat(LUCK)) * 0.4;
+        def += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 1.5;
+        def += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.73;
+        def += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.4;
+        def += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.4;
         return (int) Math.floor(def);
     }
 
-    int calculateMagicDefense(){
+    public int calculateMagicDefense(){
         double def = 0;
-        def += (vigor + getBonusStat(VIGOR)) * 0.4;
-        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
-        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
-        def += (vitality + getBonusStat(VITALITY)) * 0.4;
-        def += (strength + getBonusStat(STRENGTH)) * 0.4;
-        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
-        def += (intelligence + getBonusStat(INTELLIGENCE)) * 1.1;
-        def += (faith + getBonusStat(FAITH)) * 0.4;
-        def += (luck + getBonusStat(LUCK)) * 0.4;
+        def += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.4;
+        def += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 1.1;
+        def += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.4;
+        def += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.4;
         return (int) Math.floor(def);
     }
 
-    int calculateFireDefense(){
+    public int calculateFireDefense(){
         double def = 0;
-        def += (vigor + getBonusStat(VIGOR)) * 0.4;
-        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
-        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
-        def += (vitality + getBonusStat(VITALITY)) * 0.4;
-        def += (strength + getBonusStat(STRENGTH)) * 1.1;
-        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
-        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
-        def += (faith + getBonusStat(FAITH)) * 0.4;
-        def += (luck + getBonusStat(LUCK)) * 0.4;
+        def += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.4;
+        def += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 1.1;
+        def += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.4;
+        def += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.4;
         return (int) Math.floor(def);
     }
 
-    int calculateLightningDefense(){
+    public int calculateLightningDefense(){
         double def = 0;
-        def += (vigor + getBonusStat(VIGOR)) * 0.4;
-        def += (endurance + getBonusStat(ENDURANCE)) * 1.1;
-        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
-        def += (vitality + getBonusStat(VITALITY)) * 0.4;
-        def += (strength + getBonusStat(STRENGTH)) * 0.4;
-        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
-        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
-        def += (faith + getBonusStat(FAITH)) * 0.4;
-        def += (luck + getBonusStat(LUCK)) * 0.4;
+        def += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 1.1;
+        def += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.4;
+        def += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.4;
+        def += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.4;
         return (int) Math.floor(def);
     }
 
-    int calculateDarkDefense(){
+    public int calculateDarkDefense(){
         double def = 0;
-        def += (vigor + getBonusStat(VIGOR)) * 0.4;
-        def += (endurance + getBonusStat(ENDURANCE)) * 0.4;
-        def += (attunement + getBonusStat(ATTUNEMENT)) * 0.4;
-        def += (vitality + getBonusStat(VITALITY)) * 0.4;
-        def += (strength + getBonusStat(STRENGTH)) * 0.4;
-        def += (dexterity + getBonusStat(DEXTERITY)) * 0.4;
-        def += (intelligence + getBonusStat(INTELLIGENCE)) * 0.4;
-        def += (faith + getBonusStat(FAITH)) * 1.1;
-        def += (luck + getBonusStat(LUCK)) * 0.4;
+        def += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.4;
+        def += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.4;
+        def += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.4;
+        def += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.4;
+        def += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.4;
+        def += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.4;
+        def += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.4;
+        def += (faith + getBonusStat(SpecialEffect.FAITH)) * 1.1;
+        def += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.4;
         return (int) Math.floor(def);
     }
 
-    int calculateBleedResistance(){
+    public int calculateBleedResistance(){
         double resist = 0;
 
-        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
-        resist += (endurance + getBonusStat(ENDURANCE)) * 1.1;
-        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
-        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
-        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
-        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
-        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
-        resist += (faith + getBonusStat(FAITH)) * 0.2;
-        resist += (luck + getBonusStat(LUCK)) * 0.2;
+        resist += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 1.1;
+        resist += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.2;
+        resist += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.2;
 
         return (int) Math.floor(resist);
     }
 
-    int calculatePoisonResistance(){
+    public int calculatePoisonResistance(){
         double resist = 0;
 
-        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
-        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
-        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
-        resist += (vitality + getBonusStat(VITALITY)) * 1.1;
-        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
-        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
-        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
-        resist += (faith + getBonusStat(FAITH)) * 0.2;
-        resist += (luck + getBonusStat(LUCK)) * 0.2;
+        resist += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 1.1;
+        resist += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.2;
+        resist += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.2;
 
         return (int) Math.floor(resist);
     }
 
-    int calculateFrostResistance(){
+    public int calculateFrostResistance(){
         double resist = 0;
 
-        resist += (vigor + getBonusStat(VIGOR)) * 1.1;
-        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
-        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
-        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
-        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
-        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
-        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
-        resist += (faith + getBonusStat(FAITH)) * 0.2;
-        resist += (luck + getBonusStat(LUCK)) * 0.2;
+        resist += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 1.1;
+        resist += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.2;
+        resist += (luck + getBonusStat(SpecialEffect.LUCK)) * 0.2;
 
         return (int) Math.floor(resist);
     }
 
-    int calculateCurseResistance(){
+    public int calculateCurseResistance(){
         double resist = 0;
 
-        resist += (vigor + getBonusStat(VIGOR)) * 0.2;
-        resist += (endurance + getBonusStat(ENDURANCE)) * 0.2;
-        resist += (attunement + getBonusStat(ATTUNEMENT)) * 0.2;
-        resist += (vitality + getBonusStat(VITALITY)) * 0.2;
-        resist += (strength + getBonusStat(STRENGTH)) * 0.2;
-        resist += (dexterity + getBonusStat(DEXTERITY)) * 0.2;
-        resist += (intelligence + getBonusStat(INTELLIGENCE)) * 0.2;
-        resist += (faith + getBonusStat(FAITH)) * 0.2;
-        resist += (luck + getBonusStat(LUCK)) * 1.1;
+        resist += (vigor + getBonusStat(SpecialEffect.VIGOR)) * 0.2;
+        resist += (endurance + getBonusStat(SpecialEffect.ENDURANCE)) * 0.2;
+        resist += (attunement + getBonusStat(SpecialEffect.ATTUNEMENT)) * 0.2;
+        resist += (vitality + getBonusStat(SpecialEffect.VITALITY)) * 0.2;
+        resist += (strength + getBonusStat(SpecialEffect.STRENGTH)) * 0.2;
+        resist += (dexterity + getBonusStat(SpecialEffect.DEXTERITY)) * 0.2;
+        resist += (intelligence + getBonusStat(SpecialEffect.INTELLIGENCE)) * 0.2;
+        resist += (faith + getBonusStat(SpecialEffect.FAITH)) * 0.2;
+        resist += (luck + getBonusStat(SpecialEffect.LUCK)) * 1.1;
 
         return (int) Math.floor(resist);
     }
@@ -494,7 +484,7 @@ public class Character implements Serializable {
 
     public int getBonusStat(int stat){
         switch (stat){
-            case VIGOR:
+            case SpecialEffect.VIGOR:
                 return getHelm().getSpecialEffects().getVigor()
                         + getChest().getSpecialEffects().getVigor()
                         + getGauntlets().getSpecialEffects().getVigor()
@@ -509,7 +499,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getVigor()
                         + getRightHand2().getSpecialEffects().getVigor()
                         + getRightHand3().getSpecialEffects().getVigor();
-            case ATTUNEMENT:
+            case SpecialEffect.ATTUNEMENT:
                 return getHelm().getSpecialEffects().getAttunement()
                         + getChest().getSpecialEffects().getAttunement()
                         + getGauntlets().getSpecialEffects().getAttunement()
@@ -524,7 +514,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getAttunement()
                         + getRightHand2().getSpecialEffects().getAttunement()
                         + getRightHand3().getSpecialEffects().getAttunement();
-            case ENDURANCE:
+            case SpecialEffect.ENDURANCE:
                 return getHelm().getSpecialEffects().getEndurance()
                         + getChest().getSpecialEffects().getEndurance()
                         + getGauntlets().getSpecialEffects().getEndurance()
@@ -539,7 +529,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getEndurance()
                         + getRightHand2().getSpecialEffects().getEndurance()
                         + getRightHand3().getSpecialEffects().getEndurance();
-            case VITALITY:
+            case SpecialEffect.VITALITY:
                 return getHelm().getSpecialEffects().getVitality()
                         + getChest().getSpecialEffects().getVitality()
                         + getGauntlets().getSpecialEffects().getVitality()
@@ -554,7 +544,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getVitality()
                         + getRightHand2().getSpecialEffects().getVitality()
                         + getRightHand3().getSpecialEffects().getVitality();
-            case STRENGTH:
+            case SpecialEffect.STRENGTH:
                 return getHelm().getSpecialEffects().getStrength()
                         + getChest().getSpecialEffects().getStrength()
                         + getGauntlets().getSpecialEffects().getStrength()
@@ -569,7 +559,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getStrength()
                         + getRightHand2().getSpecialEffects().getStrength()
                         + getRightHand3().getSpecialEffects().getStrength();
-            case DEXTERITY:
+            case SpecialEffect.DEXTERITY:
                 return getHelm().getSpecialEffects().getDexterity()
                         + getChest().getSpecialEffects().getDexterity()
                         + getGauntlets().getSpecialEffects().getDexterity()
@@ -584,7 +574,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getDexterity()
                         + getRightHand2().getSpecialEffects().getDexterity()
                         + getRightHand3().getSpecialEffects().getDexterity();
-            case INTELLIGENCE:
+            case SpecialEffect.INTELLIGENCE:
                 return getHelm().getSpecialEffects().getIntelligence()
                         + getChest().getSpecialEffects().getIntelligence()
                         + getGauntlets().getSpecialEffects().getIntelligence()
@@ -599,7 +589,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getIntelligence()
                         + getRightHand2().getSpecialEffects().getIntelligence()
                         + getRightHand3().getSpecialEffects().getIntelligence();
-            case FAITH:
+            case SpecialEffect.FAITH:
                 return getHelm().getSpecialEffects().getFaith()
                         + getChest().getSpecialEffects().getFaith()
                         + getGauntlets().getSpecialEffects().getFaith()
@@ -614,7 +604,7 @@ public class Character implements Serializable {
                         + getRightHand1().getSpecialEffects().getFaith()
                         + getRightHand2().getSpecialEffects().getFaith()
                         + getRightHand3().getSpecialEffects().getFaith();
-            case LUCK:
+            case SpecialEffect.LUCK:
                 return getHelm().getSpecialEffects().getLuck()
                         + getChest().getSpecialEffects().getLuck()
                         + getGauntlets().getSpecialEffects().getLuck()

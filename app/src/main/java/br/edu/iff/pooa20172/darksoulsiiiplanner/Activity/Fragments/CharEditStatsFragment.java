@@ -1,11 +1,8 @@
-package br.edu.iff.pooa20172.darksoulsiiiplanner;
+package br.edu.iff.pooa20172.darksoulsiiiplanner.Activity.Fragments;
 
 import android.content.Context;
-import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +10,10 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.Character;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.R;
+import br.edu.iff.pooa20172.darksoulsiiiplanner.Model.SpecialEffect;
 
 public class CharEditStatsFragment extends Fragment {
     CharEditFragmentListener fListener;
